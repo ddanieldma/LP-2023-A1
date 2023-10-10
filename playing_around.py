@@ -15,9 +15,14 @@ estados = list(base_inep["SG_UF_IES"].unique())
 estados = sorted(estados)
 
 # figure
-fig = plt.figure(figsize =(10, 7))
+fig, ax = plt.subplots(figsize =(16, 9))
 
 # gráfico de barras
 plt.bar(estados, docentes_negros["QT_DOC_EX_PRETA"])
+
+# Personalização
+# remove axis splines
+for spline in ['top', 'bottom', 'left', 'right']:
+	ax.spines[spline].set_visible(False)
 
 plt.show()

@@ -5,4 +5,4 @@ def ler_csv(caminho_csv):
 
 base_inep = ler_csv("ed-superior-inep.csv")
 
-print(base_inep.head())
+# print(base_inep.head())
