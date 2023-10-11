@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from geopandas import GeoDataFrame
 from read import ler_csv
 from read import criar_geometria_brasil
+import pyproj
 
 def tratar_base() -> GeoDataFrame:
     '''Trata e une as duas bases a fim de utilizá-las para o plot
@@ -27,6 +28,5 @@ def tratar_base() -> GeoDataFrame:
 
     return dataframe_plot
 
-x = tratar_base()
-
-print(x.columns)
+geometria_brasil = criar_geometria_brasil()
+print(geometria_brasil.crs)
