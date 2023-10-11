@@ -16,10 +16,10 @@ def tratar_base() -> GeoDataFrame:
     try:
         df_guilherme = ler_csv("ed-superior-inep.csv")
     except ValueError:
-        print("O caminho deve ser uma string")
+        print("O caminho deve ser uma string (ler_csv)")
         sys.exit(1)
     except FileNotFoundError:
-        print("arquivo não encontrado")
+        print("arquivo não encontrado (ler_csv)")
         sys.exit(1)
 
     df_gui_copia = df_guilherme.copy()
@@ -31,7 +31,7 @@ def tratar_base() -> GeoDataFrame:
     try:
         df_para_plot = df_gui_copia.groupby("sigla")["QT_DOC_EXE"].sum().reset_index()
     except KeyError:
-        print("A coluna especificada não existe")
+        print("A coluna especificada não existe (groupby)")
         sys.exit(1)
     
     geometria_brasil = criar_geometria_brasil()
