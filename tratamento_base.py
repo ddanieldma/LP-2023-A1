@@ -1,3 +1,6 @@
+'''Módulo que trata a base
+'''
+
 import sys
 import pandas as pd
 import geopandas as gpd

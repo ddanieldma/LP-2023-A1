@@ -1,3 +1,6 @@
+'''Módulo que pega a base tratada e plota a visualização desejada
+'''
+
 import sys
 import geopandas as gpd
 import matplotlib.pyplot as plt
