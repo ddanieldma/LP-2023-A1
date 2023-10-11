@@ -2,11 +2,11 @@ import geopandas as gpd
 from tratamento_base import tratar_base
 import matplotlib.pyplot as plt
 
-def customização_plot():
+def customização_plot() -> bool:
     plt.title("Número de Docentes de Ensino Superior por Estado ", fontsize=11)
     return True
 
-def plotar_gráfico():
+def plotar_gráfico() -> None:
     dataframe_plot = tratar_base()
     dataframe_plot.plot(column = "QT_DOC_EXE",
                     cmap = "viridis",

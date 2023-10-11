@@ -1,10 +1,11 @@
 import pandas as pd
 import geopandas as gpd
+import matplotlib.pyplot as plt
+from geopandas import GeoDataFrame
 from read import ler_csv
 from read import criar_geometria_brasil
-import matplotlib.pyplot as plt
 
-def tratar_base():
+def tratar_base() -> GeoDataFrame:
     df_guilherme = ler_csv("ed-superior-inep.csv")
     df_gui_copia = df_guilherme.copy()
     df_gui_copia.rename({"SG_UF_IES": "sigla"}, axis = 1, inplace = True)
