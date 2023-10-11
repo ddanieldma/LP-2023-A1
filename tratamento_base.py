@@ -5,15 +5,33 @@ import sys
 import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
+from pandas import DataFrame
 from geopandas import GeoDataFrame
 from read import ler_csv
 from read import criar_geometria_brasil
 
-def tratar_base() -> GeoDataFrame:
-    '''Trata e une as duas bases a fim de utilizá-las para o plot
+def renomear_coluna(df, nome_antigo, nome_novo) -> DataFrame:
+    df.rename(columns={nome_antigo: nome_novo}, inplace=True)
+    return df
 
-    :returns: Dataframe pronto para ser utilizado no plot
-    :rtype: GeoDataFrame
+def agrupamento_de_dados(df, coluna_base, coluna_valores) -> DataFrame:
+    try:
+        df_para_plot = df.groupby(coluna_base)[coluna_valores].sum().reset_index()
+    except KeyError:
+        raise KeyError("A coluna especificada não existe (groupby)")
+    return df_para_plot
+
+def merge_bases(base1, base2, coluna):
+    try:
+        dataframe_plot = base1.merge(base2, on=coluna, how="left")
+    except Exception as erro:
+        print("O seguinte argumento impossibilitou o merge:", erro)
+        sys.exit(1)
+    
+    return dataframe_plot
+
+def tratar_base() -> GeoDataFrame:
+    '''Une as funções de tratamento de base para retornar o dataframe final
     '''  
 
     try:
@@ -28,22 +46,16 @@ def tratar_base() -> GeoDataFrame:
     df_gui_copia = df_guilherme.copy()
 
     #Renomear para igualar o nome da colunas nas bases
-    df_gui_copia.rename({"SG_UF_IES": "sigla"}, axis = 1, inplace = True)
+    renomear_coluna(df_gui_copia, "SG_UF_IES", "sigla")
 
     #Filtragem para se obter a soma de docentes por estado (sigla)
-    try:
-        df_para_plot = df_gui_copia.groupby("sigla")["QT_DOC_EXE"].sum().reset_index()
-    except KeyError:
-        print("A coluna especificada não existe (groupby)")
-        sys.exit(1)
+    df_para_plot = agrupamento_de_dados(df_gui_copia, "sigla", "QT_DOC_EXE")
     
     geometria_brasil = criar_geometria_brasil()
 
     #Unir as bases da dados com base na columa "sigla"
-    try:
-        dataframe_plot = geometria_brasil.merge(df_para_plot, on="sigla", how="left")
-    except Exception as erro:
-        print("O seguinte argumento impossibilitou o merge:", erro)
-        sys.exit(1)
+    dataframe_plot = merge_bases(geometria_brasil, df_para_plot, "sigla")
     
     return dataframe_plot 
+
+
