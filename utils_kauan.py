@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.ticker as mtick
+import doctest
 
 def ler_csv(caminho_csv):
     return pd.read_csv(caminho_csv, encoding='latin-1', sep = ';')
@@ -20,9 +21,9 @@ def removing_list_columns(dataframe: pd.DataFrame, lista: list) -> pd.DataFrame:
     >>> df = removing_list_columns(df, ["SP"])
     >>> df
        RJ
-    0  1
-    1  2
-    2  3    
+    0   1
+    1   2
+    2   3
     """
 
     # Tira as colunas do Dataframe
@@ -31,7 +32,10 @@ def removing_list_columns(dataframe: pd.DataFrame, lista: list) -> pd.DataFrame:
     # Retorna o novo dataframe
     return dataframe
 
-
+dados = {"RJ": [1, 2, 3], "SP": [4, 5, 6]}
+df = pd.DataFrame(dados)
+df = removing_list_columns(df, ["SP"])
+print(df)
 
 def removing_columns_from_to(dataframe, start_col: str, end_col: str):
     beginning_col = dataframe.columns.get_loc(start_col)
@@ -74,3 +78,5 @@ def formata_cada_plot(dataframe, title, numberplot, axis):
     axis[numberplot].set_xlabel("Unidade Federativa")
     axis[numberplot].set_ylabel("Porcentagem")
 
+if __name__ == "__main__":
+    doctest.testmod(verbose=True)
