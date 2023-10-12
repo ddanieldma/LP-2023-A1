@@ -11,15 +11,11 @@ from read import ler_csv
 from read import criar_geometria_brasil
 
 def renomear_coluna(df, nome_antigo, nome_novo) -> DataFrame:
-    """
-    Realiza a coluna desejada.
+    """Renomeia a coluna desejada.
 
-    :param df: DataFrame base.
-    :type dataframe: pandas.DataFrame
-    :param nome_antigo: Coluna cujo nome será trocado.
-    :type coluna_grupo: str
-    :param nome_novo: Novo nome para a coluna.
-    :type coluna_soma: str
+    :param pandas.DataFrame df: DataFrame base.
+    :param str nome_antigo: Coluna cujo nome será trocado.
+    :param str nome_novo: Novo nome para a coluna.
 
     :return: DataFrame com essa alteração de nome.
     :rtype: pandas.DataFrame
@@ -39,15 +35,11 @@ def renomear_coluna(df, nome_antigo, nome_novo) -> DataFrame:
     return df
 
 def agrupamento_de_dados(df, coluna_base, coluna_valores) -> DataFrame:
-    """
-    Realiza o agrupamento especificado.
+    """Realiza o agrupamento especificado.
 
-    :param df: DataFrame base.
-    :type dataframe: pandas.DataFrame
-    :param coluna_base: O nome da coluna usada para agrupar os dados.
-    :type coluna_grupo: str
-    :param coluna_valores: Coluna cujos valores serão somados.
-    :type coluna_soma: str
+    :param pandas.DataFrame df: DataFrame base.
+    :param str coluna_base: O nome da coluna usada para agrupar os dados.
+    :param str coluna_valores: Coluna cujos valores serão somados.
 
     :return: DataFrame processado.
     :rtype: pandas.DataFrame
@@ -70,15 +62,11 @@ def agrupamento_de_dados(df, coluna_base, coluna_valores) -> DataFrame:
 
 
 def merge_bases(df1, df2, coluna) -> GeoDataFrame:
-    """
-    Realiza o merge de duas bases com base na coluna especificada.
+    """Realiza o merge de duas bases com base na coluna especificada.
 
-    :param df1: Primeira base para o merge.
-    :type dataframe: pandas.DataFrame
-    :param df2: Segunda base para o merge.
-    :type coluna_grupo: pandas.DataFrame
-    :param coluna: Coluna que servirá de base para o merge.
-    :type coluna_soma: str
+    :param pandas.DataFrame df1: Primeira base para o merge.
+    :param pandas.DataFrame df2: Segunda base para o merge.
+    :param str coluna: Coluna que servirá de base para o merge.
 
     :return: DataFrame criado pela junção do df1 e df2.
     :rtype: geopandas.GeoDataFrame
