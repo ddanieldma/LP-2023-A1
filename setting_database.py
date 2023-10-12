@@ -23,5 +23,8 @@ removing_columns(df_ens_sup, "NO_MESORREGIAO_IES", "CO_MICRORREGIAO_IES")
 types_of_universities = {1: "Pública", 2:"Pública", 3: "Pública", 4: "Privada", 5:"Privada", 6:"Privada", 7: "Privada", 8: "Privada", 9: "Privada"}
 specific_type = {1 : "Pública Federal", 2: "Pública Estadual", 3: "Pública Municipal", 4: "Privada com fins lucrativos", 5: "Privada sem fins lucrativos", 6: "Privada - Particular em sentido estrito", 7 : "Especial", 8: "Privada comunitária", 9: "Privada confessional"}
 
+df_ens_sup["Tipo_UNI"] = df_ens_sup["TP_CATEGORIA_ADMINISTRATIVA"].map(types_of_universities)
+df_ens_sup["Tipo_UNI_SPE"] = df_ens_sup["TP_CATEGORIA_ADMINISTRATIVA"].map(specific_type)
+
 
 print(df_ens_sup)
