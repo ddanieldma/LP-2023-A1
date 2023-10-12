@@ -11,19 +11,61 @@ from read import ler_csv
 from read import criar_geometria_brasil
 
 def renomear_coluna(df, nome_antigo, nome_novo) -> DataFrame:
+    """
+    Realiza a coluna desejada.
+
+    :param df: DataFrame base.
+    :type dataframe: pandas.DataFrame
+    :param nome_antigo: Coluna cujo nome será trocado.
+    :type coluna_grupo: str
+    :param nome_novo: Novo nome para a coluna.
+    :type coluna_soma: str
+
+    :return: DataFrame com essa alteração de nome.
+    :rtype: pandas.DataFrame
+    """
+
     df.rename(columns={nome_antigo: nome_novo}, inplace=True)
     return df
 
 def agrupamento_de_dados(df, coluna_base, coluna_valores) -> DataFrame:
+    """
+    Realiza o agrupamento desejado.
+
+    :param df: DataFrame base.
+    :type dataframe: pandas.DataFrame
+    :param coluna_base: O nome da coluna usada para agrupar os dados.
+    :type coluna_grupo: str
+    :param coluna_valores: Coluna cujos valores serão somados.
+    :type coluna_soma: str
+
+    :return: DataFrame processado.
+    :rtype: pandas.DataFrame
+    """
+
     try:
         df_para_plot = df.groupby(coluna_base)[coluna_valores].sum().reset_index()
     except KeyError:
         raise KeyError("A coluna especificada não existe (groupby)")
     return df_para_plot
 
-def merge_bases(base1, base2, coluna):
+def merge_bases(df1, df2, coluna) -> DataFrame:
+    """
+    Realiza o merge de duas bases com base na coluna especificada.
+
+    :param df1: Primeira base para o merge.
+    :type dataframe: pandas.DataFrame
+    :param df2: Segunda base para o merge.
+    :type coluna_grupo: pandas.DataFrame
+    :param coluna: Coluna que servirá de base para o merge.
+    :type coluna_soma: str
+
+    :return: DataFrame criado pela junção do df1 e df2.
+    :rtype: pandas.DataFrame
+    """
+
     try:
-        dataframe_plot = base1.merge(base2, on=coluna, how="left")
+        dataframe_plot = df1.merge(df2, on=coluna, how="left")
     except Exception as erro:
         print("O seguinte argumento impossibilitou o merge:", erro)
         sys.exit(1)
