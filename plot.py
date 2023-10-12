@@ -1,13 +1,15 @@
 import matplotlib.pyplot as plt
-from changing_database import df_por_regiao
+import matplotlib.ticker as mtick
+from changing_database import df_dout, df_mest, df_esp
+from utils_kauan import formata_cada_plot
 
-# Crie um gráfico de barras aninhado
-ax = df_por_regiao.plot(kind='bar', stacked=True)
+# Crie um grid de subplots
+fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
-# Personalize os rótulos e o título do gráfico
-plt.xlabel('Estado')
-plt.ylabel('Porcentagem de Doutorados')
-plt.title('Porcentagem de Doutorados por Tipo de Instituição por Estado')
+formata_cada_plot(df_esp, "Professores especializados por UF", 0, axes)
+formata_cada_plot(df_mest, "Professores com mestrado por UF", 1, axes)
+formata_cada_plot(df_dout, "Professores com doutorado por UF", 1, axes)
 
-# Exiba o gráfico
+# Exiba o grid plot
+plt.tight_layout()
 plt.show()
