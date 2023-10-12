@@ -2,14 +2,37 @@ import pandas as pd
 import numpy as np
 import matplotlib.ticker as mtick
 
-def removing_list_columns(dataframe: pd.DataFrame, list: list) -> pd.DataFrame:
+def ler_csv(caminho_csv):
+    return pd.read_csv(caminho_csv, encoding='latin-1', sep = ';')
+
+def removing_list_columns(dataframe: pd.DataFrame, lista: list) -> pd.DataFrame:
+    """Essa função serve para remover uma lista de colunas de um dataframe
+
+    :param pd.Dataframe dataframe: O dataframe o qual se deseja retirar as colunas
+    :param lista list: Lista com os nomes das colunas a serem retiradas 
+
+    :returns: Dataframe com as colunas especificadas removidas
+    :rtype: pd.Dataframe
+
+    Exemplo:
+    >>> dados = {"RJ": [1, 2, 3], "SP": [4, 5, 6]}
+    >>> df = pd.DataFrame(dados)
+    >>> df = removing_list_columns(df, ["SP"])
+    >>> df
+       RJ
+    0  1
+    1  2
+    2  3    
     """
-    
-    """
-    dataframe.drop(list, axis=1, inplace=True)
+
+    # Tira as colunas do Dataframe
+    dataframe.drop(lista, axis=1, inplace=True)
+
+    # Retorna o novo dataframe
     return dataframe
 
-# Setting the columns that we need
+
+
 def removing_columns_from_to(dataframe, start_col: str, end_col: str):
     beginning_col = dataframe.columns.get_loc(start_col)
     finish_col = dataframe.columns.get_loc(end_col)

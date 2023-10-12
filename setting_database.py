@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
-from read import ler_csv
-from utils_kauan import removing_columns_from_to, removing_list_columns, type_of_university
+from utils_kauan import ler_csv, removing_columns_from_to, removing_list_columns, type_of_university
 # Lendo csv
 df_ens_sup = ler_csv("ed-superior-inep.csv")
 
