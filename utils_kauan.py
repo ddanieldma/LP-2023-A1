@@ -47,19 +47,34 @@ def removing_columns_from_to(dataframe: pd.DataFrame, start_col: str, end_col: s
 
     :returns: Dataframe removendo-se todas as colunas entre as colunas especificadas
     :rtype: pd.DataFrame 
-    
-    
+    >>> dados = {"RJ": [1, 2, 3], "SP": [4, 5, 6], "RS":[7, 8, 9], "SC":[10, 11, 12]}
+    >>> df = pd.DataFrame(dados)
+    >>> df = removing_columns_from_to(df, "RJ", "RS")
+    >>> df
+       SC
+    0  10
+    1  11
+    2  12
     """
-    # Pegando o índice das colunas que queremos retirar
-    beginning_col = dataframe.columns.get_loc(start_col)
-    finish_col = dataframe.columns.get_loc(end_col)
+    try:    
+        # Pegando o índice das colunas que queremos retirar
+        beginning_col = dataframe.columns.get_loc(start_col)
+        finish_col = dataframe.columns.get_loc(end_col)
 
-    # Selecionando o nome das colunas para retirar
-    cols_to_drop = dataframe.columns[beginning_col:finish_col+1]
+        # Selecionando o nome das colunas para retirar
+        cols_to_drop = dataframe.columns[beginning_col:finish_col+1]
 
-    #
-    dataframe.drop(cols_to_drop, axis=1, inplace=True)
-    return dataframe
+        #
+        dataframe.drop(cols_to_drop, axis=1, inplace=True)
+    except NameError:
+        return "O dataframe não existe"
+    except KeyError:
+        return "A coluna informada não existe no dataframe"
+    except TypeError:
+        return "Os elementos não são uma string"
+    else:
+        return dataframe
+
 
 # Dizendo se é pública ou privada
 def type_of_university(dataframe: pd.DataFrame, column: str = "TP_CATEGORIA_ADMINISTRATIVA", nome_coluna_nova: str = "Tipo de Universidade") -> pd.DataFrame:
@@ -73,12 +88,14 @@ def type_of_university(dataframe: pd.DataFrame, column: str = "TP_CATEGORIA_ADMI
     :rtype: pd.DataFrame
 
     """
-
-    # Dicionário com o tipo de escola
-    types_of_universities = {1: "Pública", 2:"Pública", 3: "Pública", 4: "Privada", 5:"Privada", 6:"Privada", 7: "Privada", 8: "Privada", 9: "Privada"}
-    
-    # Adicionando a nova coluna
-    dataframe[nome_coluna_nova] = dataframe[column].map(types_of_universities)
+    try: 
+        # Dicionário com o tipo de escola
+        types_of_universities = {1: "Pública", 2:"Pública", 3: "Pública", 4: "Privada", 5:"Privada", 6:"Privada", 7: "Privada", 8: "Privada", 9: "Privada"}
+        
+        # Adicionando a nova coluna
+        dataframe[nome_coluna_nova] = dataframe[column].map(types_of_universities)
+    except NameError:
+        print("O dataframe especificado não existe")
 
     # Retorna o dataframe
     return dataframe
@@ -175,5 +192,5 @@ def formata_cada_plot(dataframe: pd.DataFrame, title: str, numberplot: int, axis
     axis[numberplot].set_xlabel("Unidade Federativa")
     axis[numberplot].set_ylabel("Porcentagem")
 
-if __name__ == "__main__":
-    doctest.testmod()
+# if __name__ == "__main__":
+#     doctest.testmod()

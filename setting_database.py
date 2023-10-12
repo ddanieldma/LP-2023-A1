@@ -14,5 +14,3 @@ removing_columns_from_to(df_ens_sup, "NO_MESORREGIAO_IES", "CO_MICRORREGIAO_IES"
 type_of_university(df_ens_sup)
 
 removing_list_columns(df_ens_sup, ["TP_CATEGORIA_ADMINISTRATIVA"])
-
-print(df_ens_sup)
