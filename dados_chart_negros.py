@@ -2,6 +2,8 @@ import numpy as np
 
 from read import base_inep
 
+from auxiliary import *
+
 # agrupando por estado as quantidades de docentes de cada etnia e colocando a região de cada estado
 estado_regioes = base_inep.groupby(["SG_UF_IES"])["NO_REGIAO_IES"].unique().reset_index()
 professores_negros_raca_estado = base_inep.groupby(["SG_UF_IES"])[["QT_DOC_EX_PRETA", "QT_DOC_EX_PARDA", "QT_DOC_EXE"]].sum().reset_index()
@@ -22,38 +24,6 @@ professores_negros_raca_estado_sorted = (
 	.apply(lambda x: x.sort_values(["negros_relacao"], ascending=False))
 	.reset_index(drop=True)
 )
-
-# Função auxiliar para rotação e alinhamento dos labels.
-def get_label_rotation(angle, offset):
-	rotation = np.rad2deg(angle + offset)
-	if angle <= np.pi:
-		alignment = "right"
-		rotation = rotation + 180
-	else: 
-		alignment = "left"
-	return rotation, alignment
-
-# Função que adiciona os labels
-def add_labels(angles, values, labels, offset, ax):
-
-	#espaço entre fim da barra e o label
-	padding = 4
-
-	for angle, value, label in zip(angles, values, labels):
-		angle = angle
-
-		# obtendo rotação e alinhamento
-		rotation, alingment = get_label_rotation(angle, offset)
-
-		ax.text(
-			x=angle,
-			y=value + padding,
-			s=label,
-			ha=alingment,
-			va="center",
-			rotation=rotation,
-			rotation_mode="anchor"
-		)
 
 # Gráfico de barras circular
 GROUP_negros = professores_negros_raca_estado_sorted["NO_REGIAO_IES"].values

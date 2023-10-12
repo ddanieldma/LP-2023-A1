@@ -5,12 +5,15 @@ import matplotlib.pyplot as plt
 from dados_chart_brancos import *
 from dados_chart_negros import *
 
+from auxiliary import add_labels
+
 # definindo multiplos plots circulares
 fig, (ax1, ax2) = plt.subplots(1, 2, subplot_kw=dict(projection="polar"))
 
 #==================================================================
 # Primeiro plot, para docentes brancos
-# offset especial
+ax1.set_title("Porcentagem de docentes brancos", verticalalignment="bottom")
+
 ax1.set_theta_offset(OFFSET_brancos)
 
 # define limites para altura da barra, de forma que aja um buraco no meio
@@ -41,7 +44,7 @@ for grupo, tamanho in zip(["Centro-Oeste", "Nordeste", "Norte", "Sudeste", "Sul"
 
 	ax1.text(
 		np.mean(x1), -20, grupo, color="#333333", fontsize=8,
-		fontweight="bold", ha="center", va="center"
+		fontweight="bold", ha="center", va="top"
 	)
 
 	# adicionando marcações de 20%, 40%, 60%, 80% e 100%
@@ -56,7 +59,8 @@ for grupo, tamanho in zip(["Centro-Oeste", "Nordeste", "Norte", "Sudeste", "Sul"
 
 #==================================================================
 # Segundo plot, para docentes brancos
-# offset especial
+ax2.set_title("Porcentagem de docentes negros")
+
 ax2.set_theta_offset(OFFSET_negros)
 
 # define limites para altura da barra, de forma que aja um buraco no meio
