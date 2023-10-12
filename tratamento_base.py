@@ -54,8 +54,8 @@ def agrupamento_de_dados(df, coluna_base, coluna_valores) -> DataFrame:
 
     Exemplo:
     >>> dados = {'sigla': ['SP', 'RJ', 'SP', 'RJ'], 'QT_DOC_EXE': [100, 200, 150, 250]}
-    >>> df = pd.DataFrame(data)
-    >>> resultado = agrupar_e_somar(df, 'sigla', 'QT_DOC_EXE')
+    >>> df = pd.DataFrame(dados)
+    >>> resultado = agrupamento_de_dados(df, 'sigla', 'QT_DOC_EXE')
     >>> resultado
       sigla  QT_DOC_EXE
     0    SP        250
