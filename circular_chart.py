@@ -2,87 +2,102 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from read import base_inep
+from dados_chart_brancos import *
+from dados_chart_negros import *
 
-por_regiao = base_inep.groupby(["NO_REGIAO_IES"]).sum().reset_index()
-professores_raca_e_regiao = por_regiao[["QT_DOC_EX_BRANCA", "QT_DOC_EX_PRETA",
-										"QT_DOC_EX_PARDA", "QT_DOC_EX_AMARELA",
-										"QT_DOC_EX_INDIGENA", "NO_REGIAO_IES"]]
-professores_brancos_estado = base_inep.groupby(["SG_UF_IES"])["QT_DOC_EX_BRANCA"].sum().reset_index()
+# definindo multiplos plots circulares
+fig, (ax1, ax2) = plt.subplots(1, 2, subplot_kw=dict(projection="polar"))
 
-def add_populacao_regioes(dicionario_populacoes: dict, df: pd.DataFrame) -> pd.DataFrame:
+#==================================================================
+# Primeiro plot, para docentes brancos
+# offset especial
+ax1.set_theta_offset(OFFSET_brancos)
 
+# define limites para altura da barra, de forma que aja um buraco no meio
+ax1.set_ylim(-100, 100)
 
-print(professores_raca_e_regiao)
+ax1.set_frame_on(False)
+ax1.xaxis.grid(False)
+ax1.yaxis.grid(False)
+ax1.set_xticks([])
+ax1.set_rlabel_position(-355)
+ax1.set_yticks([20, 40, 60, 80, 100])
+ax1.set_yticklabels(["20%", "40%", "60%", "80%", "100%"], fontsize=9)
 
-# # Função auxiliar para rotação e alinhamento dos labels.
-# def get_label_rotation(angle, offset):
-# 	rotation = np.rad2deg(angle + offset)
-# 	if angle <= np.pi:
-# 		alignment = "right"
-# 		rotation = rotation + 180
-# 	else: 
-# 		alignment = "left"
-# 	return rotation, alignment
+GROUPS_SIZE = [len(regiao[1]) for regiao in professores_brancos_raca_estado.groupby("NO_REGIAO_IES")]
+COLORS = [f"C{i}" for i, tamanho in enumerate(GROUPS_SIZE) for _ in range(tamanho)]
 
-# # Função que adiciona os labels
-# def add_labels(angles, values, labels, offset, ax):
+ax1.bar(
+	ANGLES_brancos[IDXS], VALUES_brancos, width=WIDTH_brancos, linewidth=2,
+	color=COLORS, edgecolor="#ffffff"
+)
 
-# 	#espaço entre fim da barra e o label
-# 	padding = 4
+add_labels(ANGLES_brancos[IDXS], VALUES_brancos, LABELS_brancos, OFFSET_brancos, ax1)
 
-# 	for angle, value, label in zip(angles, values, labels):
-# 		angle = angle
+offset = 0
+for grupo, tamanho in zip(["Centro-Oeste", "Nordeste", "Norte", "Sudeste", "Sul"], GROUPS_SIZE):
+	x1 = np.linspace(ANGLES_brancos[offset + PAD_brancos], ANGLES_brancos[offset + tamanho + PAD_brancos - 1])
+	ax1.plot(x1, [-5] * 50, color="#333333")
 
-# 		# obtendo rotação e alinhamento
-# 		rotation, alingment = get_label_rotation(angle, offset)
+	ax1.text(
+		np.mean(x1), -20, grupo, color="#333333", fontsize=8,
+		fontweight="bold", ha="center", va="center"
+	)
 
-# 		ax.text(
-# 			x=angle,
-# 			y=value + padding,
-# 			s=label,
-# 			ha=alingment,
-# 			va="center",
-# 			rotation=rotation,
-# 			rotation_mode="anchor"
-# 		)
+	# adicionando marcações de 20%, 40%, 60%, 80% e 100%
+	x2 = np.linspace(ANGLES_brancos[offset], ANGLES_brancos[offset + tamanho + PAD_brancos - 1], num=50)
+	ax1.plot(x2, [20] * 50, color="#bebebe", lw=0.8)
+	ax1.plot(x2, [40] * 50, color="#bebebe", lw=0.8)
+	ax1.plot(x2, [60] * 50, color="#bebebe", lw=0.8)
+	ax1.plot(x2, [80] * 50, color="#bebebe", lw=0.8)
+	ax1.plot(x2, [100] * 50, color="#bebebe", lw=0.8)
 
-# # Gráfico de barras circular
-# # posições onde as barras estão localizadas
-# ANGLES = np.linspace(0, 2 * np.pi,
-# 					 len(professores_brancos_estado), endpoint=False)
-# VALUES = professores_brancos_estado["QT_DOC_EX_BRANCA"].values
-# LABELS = professores_brancos_estado["SG_UF_IES"].values
-# # VALUES = list(professores_brancos_estado["QT_DOC_EX_BRANCA"].values)
-# # LABELS = list(professores_brancos_estado["SG_UF_IES"].values)
+	offset += tamanho + PAD_brancos
 
-# # determina largura de cada barra dividindo dois pi pelo numero de barras
-# WIDTH = 2 * np.pi / len(VALUES)
+#==================================================================
+# Segundo plot, para docentes brancos
+# offset especial
+ax2.set_theta_offset(OFFSET_negros)
 
-# # Determina onde colocar a primeira barra, começando em 90º. Por padrão o
-# # matplotlib inicia em 0
-# OFFSET = np.pi / 2
+# define limites para altura da barra, de forma que aja um buraco no meio
+ax2.set_ylim(-100, 100)
 
-# fig, ax = plt.subplots(figsize=(200, 100), subplot_kw={"projection": "polar"})
+ax2.set_frame_on(False)
+ax2.xaxis.grid(False)
+ax2.yaxis.grid(False)
+ax2.set_xticks([])
+ax2.set_rlabel_position(-355)
+ax2.set_yticks([20, 40, 60, 80, 100])
+ax2.set_yticklabels(["20%", "40%", "60%", "80%", "100%"], fontsize=9)
 
-# # offset especial
-# ax.set_theta_offset(OFFSET)
+GROUPS_SIZE = [len(regiao[1]) for regiao in professores_negros_raca_estado.groupby("NO_REGIAO_IES")]
+COLORS = [f"C{i}" for i, tamanho in enumerate(GROUPS_SIZE) for _ in range(tamanho)]
 
-# # define limites para altura da barra, de forma que aja um buraco no meio
-# ax.set_ylim(-100, 100000)
+ax2.bar(
+	ANGLES_negros[IDXS], VALUES_negros, width=WIDTH_negros, linewidth=2,
+	color=COLORS, edgecolor="#ffffff"
+)
 
-# ax.set_frame_on(False)
+add_labels(ANGLES_negros[IDXS], VALUES_negros, LABELS_negros, OFFSET_negros, ax2)
 
-# ax.xaxis.grid(False)
-# ax.yaxis.grid(False)
-# ax.set_xticks([])
-# ax.set_yticks([])
+offset = 0
+for grupo, tamanho in zip(["Centro-Oeste", "Nordeste", "Norte", "Sudeste", "Sul"], GROUPS_SIZE):
+	x1 = np.linspace(ANGLES_negros[offset + PAD_negros], ANGLES_negros[offset + tamanho + PAD_negros - 1])
+	ax2.plot(x1, [-5] * 50, color="#333333")
 
-# ax.bar(
-# 	ANGLES, VALUES, width=WIDTH, linewidth=2,
-# 	color="#6ce5e8", edgecolor="white"
-# )
+	ax2.text(
+		np.mean(x1), -20, grupo, color="#333333", fontsize=8,
+		fontweight="bold", ha="center", va="top"
+	)
 
-# add_labels(ANGLES, VALUES, LABELS, OFFSET, ax)
+	# adicionando marcações de 20%, 40%, 60%, 80% e 100%
+	x2 = np.linspace(ANGLES_negros[offset], ANGLES_negros[offset + tamanho + PAD_negros - 1], num=50)
+	ax2.plot(x2, [20] * 50, color="#bebebe", lw=0.8)
+	ax2.plot(x2, [40] * 50, color="#bebebe", lw=0.8)
+	ax2.plot(x2, [60] * 50, color="#bebebe", lw=0.8)
+	ax2.plot(x2, [80] * 50, color="#bebebe", lw=0.8)
+	ax2.plot(x2, [100] * 50, color="#bebebe", lw=0.8)
 
-# plt.show()
+	offset += tamanho + PAD_negros
+
+plt.show()
