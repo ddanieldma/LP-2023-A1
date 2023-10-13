@@ -13,15 +13,15 @@ def ler_csv(caminho_csv) -> DataFrame:
     """
     try:
         df = pd.read_csv(caminho_csv, encoding='latin-1', sep = ';')
-    # except FileNotFoundError:
-    #     print("Arquivo não encontrado")
+    except FileNotFoundError:
+        print("Arquivo não encontrado")
     except ValueError:
         print("O caminho deve ser uma string")
     else:
         return df    
+    
 
-df_ens_sup = ler_csv("../bases_de_dados/ed-superior-inep.csv")
-print(df_ens_sup)
+base_inep = ler_csv("ed-superior-inep.csv")
 
 
 def criar_geometria_brasil(caminho_arq, layer_arq) -> GeoDataFrame:
