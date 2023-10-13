@@ -1,8 +1,16 @@
+import sys
+sys.path.append("..\LP-2023-A1")
 import pandas as pd
 import numpy as np
-from utils_kauan import *
+from plot_functions.plot_kauan import formata_cada_plot
+from clean_functions.utils_kauan import *
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
+
+
 # Lendo csv
-df_ens_sup = ler_csv("ed-superior-inep.csv")
+df_ens_sup = ler_csv("bases_de_dados/ed-superior-inep.csv")
+
 
 # Dropando as colunas com drop
 removing_list_columns(df_ens_sup, ["NU_ANO_CENSO", "CO_MUNICIPIO_IES", "CO_UF_IES", "CO_REGIAO_IES","NO_REGIAO_IES","NO_UF_IES", "NO_MUNICIPIO_IES", "IN_CAPITAL_IES", "TP_ORGANIZACAO_ACADEMICA"])
@@ -28,7 +36,18 @@ cria_porcentagem(df_por_regiao, "PCT_MEST_TOTAL", "QT_DOC_EX_MEST", total_doc_po
 cria_porcentagem(df_por_regiao, "PCT_ESP_TOTAL", "QT_DOC_EX_ESP", total_doc_por_UF)
 
 df_select = df_por_regiao[["PCT_DOUT_TOTAL"]]
-print(df_select.head().to_dict())
+
 df_dout = cria_base_ordem_crescente(df_por_regiao, "Tipo de Universidade", "PCT_DOUT_TOTAL")
 df_mest = cria_base_ordem_crescente(df_por_regiao, "Tipo de Universidade", "PCT_MEST_TOTAL")
 df_esp = cria_base_ordem_crescente(df_por_regiao, "Tipo de Universidade", "PCT_ESP_TOTAL")
+
+# Crie um grid de subplots
+fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+
+formata_cada_plot(df_esp, "Professores especializados por UF", 0, axes)
+formata_cada_plot(df_mest, "Professores com mestrado por UF", 1, axes)
+formata_cada_plot(df_dout, "Professores com doutorado por UF", 2, axes)
+
+# Exiba o grid plot
+plt.tight_layout()
+plt.savefig("graficos/percentuais_de_docentes.png")
