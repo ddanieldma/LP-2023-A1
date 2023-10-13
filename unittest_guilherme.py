@@ -32,32 +32,32 @@ class TesteFunções(unittest.TestCase):
     def test_função_renomear(self):
         #Não se espera erro
         base_renomeada = renomear_coluna(df_teste_renomear_1, "SP", "MG")
-        self.assertTrue(base_renomeada.equals(df_teste_renomear_2))
+        pd.testing.assert_frame_equal(base_renomeada, df_teste_renomear_2)
 
     def test_renomear_coluna_2(self):
         #Erro esperado
         base_renomeada = renomear_coluna(df_teste_renomear_1, "SP", "MG")
-        self.assertTrue(base_renomeada.equals(df_teste_agrupar_1))
+        pd.testing.assert_frame_equal(base_renomeada, df_teste_agrupar_1)
 
     def test_agrup_dados(self):
         #Não se espera erro
         base_agrupada = agrupamento_de_dados(df_teste_agrupar_1, "sigla", "QT_DOC_EXE")
-        self.assertTrue(base_agrupada.equals(df_teste_agrupar_2))
+        pd.testing.assert_frame_equal(base_agrupada, df_teste_agrupar_2)
 
     def test_agrup_dados_2(self):
         #Erro esperado
         base_agrupada = agrupamento_de_dados(df_teste_agrupar_1, "sigla", "QT_DOC_EXE")
-        self.assertTrue(base_agrupada.equals(df_teste_renomear_2))
+        pd.testing.assert_frame_equal(base_agrupada, df_teste_renomear_2)
 
     def test_merge_bases(self):
         #Não se espera erro
         base_resultado = merge_bases(df_teste_merge_1, df_teste_merge_2, "ID")
-        self.assertTrue(base_resultado.equals(df_teste_merge_3))
+        pd.testing.assert_frame_equal(base_resultado, df_teste_merge_3)
 
     def test_merge_bases_2(self):
         #Erro esperado
         base_resultado = merge_bases(df_teste_merge_1, df_teste_merge_2, "ID")
-        self.assertTrue(base_resultado.equals(df_teste_renomear_2))
+        pd.testing.assert_frame_equal(base_resultado, df_teste_renomear_2)
 
 if __name__ == "__main__":
     unittest.main()
