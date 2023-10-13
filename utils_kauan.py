@@ -168,19 +168,22 @@ def cria_porcentagem(dataframe: pd.DataFrame, nome_col: str, num_doc_esp: str, t
 
     """
     try:
+        # Checando se é uma string
+        if not isinstance(nome_col, str) or not isinstance(num_doc_esp, str):
+            raise ValueError
+
+        
         # Criando uma nova coluna com a porcentagem
         dataframe[nome_col] = (dataframe[num_doc_esp]/total_por_UF)*100
 
     except KeyError:
-        return "O nome da coluna não existe ou não é uma string"
+        return "O nome da coluna não existe"
+    except ValueError:
+        return "O nome da coluna não é uma string"
     except Exception as error:
         return f"Houve um erro. Por favor, tente novamente:{error}"
     # Retorna o dataframe
     return dataframe
-
-data = pd.DataFrame({'QT_DOC_TOTAL': {('AC', 'Privada'): 339, ('AC', 'Pública'): 1002, ('AL', 'Privada'): 2370, ('AL', 'Pública'): 2690, ('AM', 'Privada'): 2088}, 'QT_DOC_EX_DOUT': {('AC', 'Privada'): 70, ('AC', 'Pública'): 522, ('AL', 'Privada'): 553, ('AL', 'Pública'): 1622, ('AM', 'Privada'): 427}})
-data = data.rename_axis(["SG_UF_IES", "Tipo de Universidade"])
-total_doc_por_UF = total_doc_por_UF = data.groupby(level='SG_UF_IES')['QT_DOC_TOTAL'].sum()
 
 
 
@@ -227,11 +230,6 @@ def cria_base_ordem_crescente(dataframe : pd.DataFrame, index_to_unstack: str ,c
         # Retornando o Dataframe
         return dataframe
 
-# dados = {'PCT_DOUT_TOTAL': {('AC', 'Privada'): 5.219985085756898, ('AC', 'Pública'): 38.92617449664429, ('AL', 'Privada'): 10.928853754940711, ('AL', 'Pública'): 32.055335968379445, ('AM', 'Privada'): 7.8463800073502386}}
-# df = pd.DataFrame(dados)
-# df = df.rename_axis(["SG_UF_IES", "Tipo de Universidade"])
-# print(cria_base_ordem_crescente(df, "Tipo de Universidade", "PCT_DOUT_TOTAL"))
-
 #####################################################################
 # making each plot
 def formata_cada_plot(dataframe: pd.DataFrame, title: str, numberplot: int, axis: np.ndarray) -> None:
@@ -268,7 +266,7 @@ def formata_cada_plot(dataframe: pd.DataFrame, title: str, numberplot: int, axis
         axis[numberplot].set_ylabel("Porcentagem")
 
     except ValueError:
-        return "O título não é uma string do plot não existe"
+        return "O título não é uma string"
     except IndexError:
         return "O número do plot não existe"
 
