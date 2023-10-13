@@ -41,3 +41,4 @@ def criar_geometria_brasil(caminho_arq, layer_arq) -> GeoDataFrame:
 
     return geometria_brasil
 
+''
