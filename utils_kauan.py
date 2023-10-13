@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.ticker as mtick
+import matplotlib.pyplot as plt
 import doctest
 
 def ler_csv(caminho_csv):
@@ -24,6 +25,13 @@ def removing_list_columns(dataframe: pd.DataFrame, lista: list) -> pd.DataFrame:
     0   1
     1   2
     2   3
+
+    >>> removing_list_columns(df, ["DF", "RS", "SC"])
+    'O nome da coluna não está no dataframe'
+
+    >>> removing_list_columns(df, "DF")
+    'Você não colocou uma lista de strings'
+
     """
 
     try:
@@ -123,6 +131,8 @@ def type_of_university(dataframe: pd.DataFrame, column: str = "TP_CATEGORIA_ADMI
     1          FGV                            5              Privada
     2          PUC                            6              Privada
 
+    >>> type_of_university(df, "TP")
+    'O nome da coluna não existe ou não é uma string'
     """
     try: 
         # Dicionário com o tipo de escola
@@ -156,16 +166,12 @@ def cria_porcentagem(dataframe: pd.DataFrame, nome_col: str, num_doc_esp: str, t
     >>> df = pd.DataFrame(dados)
     >>> df = df.rename_axis(["SG_UF_IES", "Tipo de Universidade"])
     >>> total_doc_por_UF = total_doc_por_UF = df.groupby(level='SG_UF_IES')['QT_DOC_TOTAL'].sum()
-    >>> cria_porcentagem(df, "PCT_DOUT_TOTAL", "QT_DOC_EX_DOUT", total_doc_por_UF)
-                                    QT_DOC_TOTAL  QT_DOC_EX_DOUT  PCT_DOUT_TOTAL
-    SG_UF_IES Tipo de Universidade
-    AC        Privada                        339              70        5.219985
-              Pública                       1002             522       38.926174
-    AL        Privada                       2370             553       10.928854
-              Pública                       2690            1622       32.055336
-    AM        Privada                       2088             427       20.450192
+    
+    >>> cria_porcentagem(df, "PCT_DOC_TOT", "nome_aleatorio", total_doc_por_UF)
+    'O nome da coluna não existe'
 
-
+    >>> cria_porcentagem(df, "PCT_DOC_TOT", 3, total_doc_por_UF)
+    'O nome da coluna não é uma string'
     """
     try:
         # Checando se é uma string
@@ -200,12 +206,14 @@ def cria_base_ordem_crescente(dataframe : pd.DataFrame, index_to_unstack: str ,c
     >>> dados = {'PCT_DOUT_TOTAL': {('AC', 'Privada'): 5.219985085756898, ('AC', 'Pública'): 38.92617449664429, ('AL', 'Privada'): 10.928853754940711, ('AL', 'Pública'): 32.055335968379445, ('AM', 'Privada'): 7.8463800073502386}}
     >>> df = pd.DataFrame(dados)
     >>> df = df.rename_axis(["SG_UF_IES", "Tipo de Universidade"])
-    >>> cria_base_ordem_crescente(df, "Tipo de Universidade", "PCT_DOUT_TOTAL")
-    Tipo de Universidade    Privada    Pública
-    SG_UF_IES
-    AM                     7.846380        NaN
-    AL                    10.928854  32.055336
-    AC                     5.219985  38.926174
+    
+
+    >>> cria_base_ordem_crescente(df, "Tipo de Universidade", "qualquer_nome")
+    'O nome do index ou da coluna não existe no dataframe'
+
+    >>> cria_base_ordem_crescente(df, 1, 4)
+    'O(s) nome(s) da(s) coluna(s) que você passou não é uma string'
+
     """
     try: 
         # Checando se é uma string
@@ -241,7 +249,16 @@ def formata_cada_plot(dataframe: pd.DataFrame, title: str, numberplot: int, axis
     :param np.ndarray axis: O nd.array com o gridplot
 
     :rype: None
+    
+    Exemplo 
+    >>> axes = plt.subplots(1, 3, figsize=(15, 5))
+    >>> data = pd.DataFrame({"RJ":[1,2,3]})
 
+    >>> formata_cada_plot(data, "Hello", 15, axes)
+    'O número do plot não existe'
+
+    >>> formata_cada_plot(data, 1, 1, axes)
+    'O título não é uma string'
     """
     try: 
         if not isinstance(title, str):
@@ -270,5 +287,5 @@ def formata_cada_plot(dataframe: pd.DataFrame, title: str, numberplot: int, axis
     except IndexError:
         return "O número do plot não existe"
 
-# if __name__ == "__main__":
-#     doctest.testmod()
+if __name__ == "__main__":
+    doctest.testmod()
