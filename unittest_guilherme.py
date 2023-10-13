@@ -30,24 +30,17 @@ df_teste_merge_3 = pd.DataFrame(dados_teste_merge_3)
 class TesteFunções(unittest.TestCase):
 
     def test_função_renomear(self):
-        #Não se espera erro
+
         base_renomeada = renomear_coluna(df_teste_renomear_1, "SP", "MG")
         pd.testing.assert_frame_equal(base_renomeada, df_teste_renomear_2)
-
-    def test_renomear_coluna_2(self):
-        #Erro esperado
-        base_renomeada = renomear_coluna(df_teste_renomear_1, "SP", "MG")
-        pd.testing.assert_frame_equal(base_renomeada, df_teste_agrupar_1)
 
     def test_agrup_dados(self):
         #Não se espera erro
         base_agrupada = agrupamento_de_dados(df_teste_agrupar_1, "sigla", "QT_DOC_EXE")
         pd.testing.assert_frame_equal(base_agrupada, df_teste_agrupar_2)
 
-    def test_agrup_dados_2(self):
-        #Erro esperado
-        base_agrupada = agrupamento_de_dados(df_teste_agrupar_1, "sigla", "QT_DOC_EXE")
-        pd.testing.assert_frame_equal(base_agrupada, df_teste_renomear_2)
+        output_esperado = "A coluna especificada não existe"
+        self.assertEqual(agrupamento_de_dados(df_teste_agrupar_1, "silas", "QT_DOC_EXE"), output_esperado)
 
     def test_merge_bases(self):
         #Não se espera erro
@@ -56,8 +49,8 @@ class TesteFunções(unittest.TestCase):
 
     def test_merge_bases_2(self):
         #Erro esperado
-        base_resultado = merge_bases(df_teste_merge_1, df_teste_merge_2, "ID")
-        pd.testing.assert_frame_equal(base_resultado, df_teste_renomear_2)
+        output_esperado = "A coluna especificada não existe"
+        self.assertEqual(merge_bases(df_teste_merge_1, df_teste_merge_2, "FGV"), output_esperado)
 
 if __name__ == "__main__":
     unittest.main()

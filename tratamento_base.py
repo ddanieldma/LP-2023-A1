@@ -31,7 +31,6 @@ def renomear_coluna(df, nome_antigo, nome_novo) -> DataFrame:
     2  3  6
     """
     df.rename(columns={nome_antigo: nome_novo}, inplace=True)
-    
     return df
 
 def agrupamento_de_dados(df, coluna_base, coluna_valores) -> DataFrame:
@@ -56,9 +55,9 @@ def agrupamento_de_dados(df, coluna_base, coluna_valores) -> DataFrame:
     try:
         df_para_plot = df.groupby(coluna_base)[coluna_valores].sum().reset_index()
     except KeyError:
-        raise KeyError("A coluna especificada não existe (groupby)")
-    
-    return df_para_plot
+        return "A coluna especificada não existe"
+    else:
+        return df_para_plot
 
 
 def merge_bases(df1, df2, coluna) -> GeoDataFrame:
@@ -83,13 +82,13 @@ def merge_bases(df1, df2, coluna) -> GeoDataFrame:
     1   2        RJ  10000
     2   3        SP  70000
     """
+
     try:
         dataframe_plot = df1.merge(df2, on=coluna, how="left")
-    except Exception as erro:
-        print("O seguinte argumento impossibilitou o merge:", erro)
-        sys.exit(1)
-    
-    return dataframe_plot
+    except KeyError:
+        return "A coluna especificada não existe"
+    else:
+        return dataframe_plot
 
 
 def tratar_base() -> GeoDataFrame:
@@ -120,4 +119,5 @@ def tratar_base() -> GeoDataFrame:
     
     return dataframe_plot 
 
-
+df_guilherme = ler_csv("ed-superior-inep.csv")
+print(merge_bases(df_guilherme, df_guilherme, 7))
