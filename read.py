@@ -24,20 +24,20 @@ def ler_csv(caminho_csv) -> DataFrame:
 base_inep = ler_csv("ed-superior-inep.csv")
 
 
-def criar_geometria_brasil() -> GeoDataFrame:
+def criar_geometria_brasil(caminho_arq, layer_arq) -> GeoDataFrame:
     """Recebe um arquivo e retona um geodataframe
 
-    :param str caminho_csv: caminho do arquivo (nesse caso, .gpkg)
+    :param str caminho_csv: caminho do arquivo .gpkg
 
     :return: GeoDataFrame produzido com base no arquivo
     :rtype: geopandas.GeoDataFrame
     """
 
     try:
-        geometria_brasil = gpd.read_file("bcim_2016_21_11_2018.gpkg", layer = "lim_unidade_federacao_a")
-    except FileNotFoundError:
-        print("Arquivo não encontrado")
-    except ValueError:
-        print("O caminho deve ser uma string")
+        geometria_brasil = gpd.read_file(caminho_arq, layer = layer_arq)
+    except Exception as erro:
+        print("Arquivo não encontrado ou input != string")
     else:
         return geometria_brasil
+
+#"bcim_2016_21_11_2018.gpkg", layer = "lim_unidade_federacao_a"

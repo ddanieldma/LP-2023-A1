@@ -2,6 +2,7 @@
 '''
 
 import unittest
+import geopandas as gpd
 import pandas as pd
 from read import *
 
@@ -38,6 +39,28 @@ class TesteFunçõesMain(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             ler_csv(10)
+    
+    def test_função_geom_br1(self):
+        #Não se espera falha (resultado deve ser um GeoDataFrame)
+
+        geodf = criar_geometria_brasil("bcim_2016_21_11_2018.gpkg", "lim_unidade_federacao_a")
+        
+        self.assertIsInstance(geodf, gpd.GeoDataFrame)
+
+    def test_função_geom_br2(self):
+        #Se espera falha (FileNotFoundError está tratado)
+        
+        with self.assertRaises(Exception):
+            criar_geometria_brasil("fgv_emap.csv", "hello world")
+
+    def test_função_geom_br3(self):
+        #Se espera falha (ValueError está tratado)  
+
+        with self.assertRaises(Exception):
+            criar_geometria_brasil(10, 2)
+
 
 if __name__ == "__main__":
     unittest.main()
+
+#O teste condiz com o esperado, sendo 5 falhas em 7 testes.
