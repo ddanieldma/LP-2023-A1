@@ -27,17 +27,27 @@ def removing_list_columns(dataframe: pd.DataFrame, lista: list) -> pd.DataFrame:
     """
 
     try:
+        # Checando se é uma lista
+        if not isinstance(lista, list):
+            raise ValueError
+        
+        # Checando se todos os elementos da lista são strings
+        for nome_coluna in lista:
+            if not isinstance(nome_coluna, str):
+                raise ValueError
+            
         # Tira as colunas do Dataframe
         dataframe.drop(lista, axis=1, inplace=True)
+
     except KeyError as error:
-        return str("O nome da coluna não está no dataframe ou você não passou uma lista de strings")
+        return "O nome da coluna não está no dataframe"
+    except ValueError:
+        return "Você não colocou uma lista de strings"
     except Exception as error:
         return f"Houve um erro. Por favor, tente novamente:{error}"
     else:
         # Retorna o novo dataframe
         return dataframe
-
-
 
 def removing_columns_from_to(dataframe: pd.DataFrame, start_col: str, end_col: str) -> pd.DataFrame:
     """ Essa função serve para remover todas as colunas entre um coluna e outra incluindo estas colunas
@@ -65,18 +75,28 @@ def removing_columns_from_to(dataframe: pd.DataFrame, start_col: str, end_col: s
     "Houve um erro. Por favor, tente novamente:'list' object has no attribute 'columns'"
     >>> 
     """
-    try:    
+    try:
+        # Verificando se a coluna é uma string
+        if not isinstance(start_col, str) or not isinstance(end_col, str):
+            raise ValueError    
+        
         # Pegando o índice das colunas que queremos retirar
         beginning_col = dataframe.columns.get_loc(start_col)
         finish_col = dataframe.columns.get_loc(end_col)
 
+        # Caso o usuário tenha colocado as colunas ao contrário
+        if finish_col < beginning_col:
+            beginning_col = finish_col
+            finish_col = dataframe.columns.get_loc(start_col)
+        
         # Selecionando o nome das colunas para retirar
         cols_to_drop = dataframe.columns[beginning_col:finish_col+1]
 
-        #
         dataframe.drop(cols_to_drop, axis=1, inplace=True)
     except KeyError:
         return "A coluna informada não existe no dataframe"
+    except ValueError:
+        return "O nome da coluna informada não é uma string"
     except Exception as error:
         return f"Houve um erro. Por favor, tente novamente:{error}"
     else:
@@ -110,6 +130,7 @@ def type_of_university(dataframe: pd.DataFrame, column: str = "TP_CATEGORIA_ADMI
         
         # Adicionando a nova coluna
         dataframe[nome_coluna_nova] = dataframe[column].map(types_of_universities)
+
     except KeyError:
         return "O nome da coluna não existe ou não é uma string"
     except Exception as error:
@@ -117,6 +138,7 @@ def type_of_university(dataframe: pd.DataFrame, column: str = "TP_CATEGORIA_ADMI
     else:
         # Retorna o dataframe
         return dataframe
+
 ######################################################################################
 # Análise
 def cria_porcentagem(dataframe: pd.DataFrame, nome_col: str, num_doc_esp: str, total_por_UF: pd.DataFrame):
@@ -156,6 +178,12 @@ def cria_porcentagem(dataframe: pd.DataFrame, nome_col: str, num_doc_esp: str, t
     # Retorna o dataframe
     return dataframe
 
+data = pd.DataFrame({'QT_DOC_TOTAL': {('AC', 'Privada'): 339, ('AC', 'Pública'): 1002, ('AL', 'Privada'): 2370, ('AL', 'Pública'): 2690, ('AM', 'Privada'): 2088}, 'QT_DOC_EX_DOUT': {('AC', 'Privada'): 70, ('AC', 'Pública'): 522, ('AL', 'Privada'): 553, ('AL', 'Pública'): 1622, ('AM', 'Privada'): 427}})
+data = data.rename_axis(["SG_UF_IES", "Tipo de Universidade"])
+total_doc_por_UF = total_doc_por_UF = data.groupby(level='SG_UF_IES')['QT_DOC_TOTAL'].sum()
+
+
+
 
 def cria_base_ordem_crescente(dataframe : pd.DataFrame, index_to_unstack: str ,col_porcentagem: str):
     """ Função que ordena os dados em ordem crescente, por UF, da menor soma de porcentagem até a maior
@@ -177,6 +205,9 @@ def cria_base_ordem_crescente(dataframe : pd.DataFrame, index_to_unstack: str ,c
     AC                     5.219985  38.926174
     """
     try: 
+        # Checando se é uma string
+        if not isinstance(index_to_unstack, str) or not isinstance(col_porcentagem, str):
+            raise ValueError
         # desempacotando o dataframe com base no index especificado
         dataframe = dataframe.unstack(index_to_unstack)[col_porcentagem]
 
@@ -187,17 +218,19 @@ def cria_base_ordem_crescente(dataframe : pd.DataFrame, index_to_unstack: str ,c
         dataframe = dataframe.loc[sum_percentage.sort_values(ascending=True).index]
 
     except KeyError:
-        return "O nome do index ou da coluna não existe ou não é uma string"
+        return "O nome do index ou da coluna não existe no dataframe"
+    except ValueError:
+        return "O(s) nome(s) da(s) coluna(s) que você passou não é uma string"
     except Exception as error:
         return f"Houve um erro. Por favor, tente novamente:{error}"
     else:
         # Retornando o Dataframe
         return dataframe
 
-dados = {'PCT_DOUT_TOTAL': {('AC', 'Privada'): 5.219985085756898, ('AC', 'Pública'): 38.92617449664429, ('AL', 'Privada'): 10.928853754940711, ('AL', 'Pública'): 32.055335968379445, ('AM', 'Privada'): 7.8463800073502386}}
-df = pd.DataFrame(dados)
-df = df.rename_axis(["SG_UF_IES", "Tipo de Universidade"])
-cria_base_ordem_crescente(df, "Tipo de Universidade", "PCT_DOUT_TOTAL")
+# dados = {'PCT_DOUT_TOTAL': {('AC', 'Privada'): 5.219985085756898, ('AC', 'Pública'): 38.92617449664429, ('AL', 'Privada'): 10.928853754940711, ('AL', 'Pública'): 32.055335968379445, ('AM', 'Privada'): 7.8463800073502386}}
+# df = pd.DataFrame(dados)
+# df = df.rename_axis(["SG_UF_IES", "Tipo de Universidade"])
+# print(cria_base_ordem_crescente(df, "Tipo de Universidade", "PCT_DOUT_TOTAL"))
 
 #####################################################################
 # making each plot
@@ -239,5 +272,5 @@ def formata_cada_plot(dataframe: pd.DataFrame, title: str, numberplot: int, axis
     except IndexError:
         return "O número do plot não existe"
 
-if __name__ == "__main__":
-    doctest.testmod()
+# if __name__ == "__main__":
+#     doctest.testmod()
