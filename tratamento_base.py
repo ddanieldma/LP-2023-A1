@@ -55,7 +55,7 @@ def agrupamento_de_dados(df, coluna_base, coluna_valores) -> DataFrame:
     try:
         df_para_plot = df.groupby(coluna_base)[coluna_valores].sum().reset_index()
     except KeyError:
-        return "A coluna especificada não existe"
+        return "A coluna especificada não existe ou seus valores não podem ser somados"
     else:
         return df_para_plot
 
@@ -118,6 +118,3 @@ def tratar_base() -> GeoDataFrame:
     dataframe_plot = merge_bases(geometria_brasil, df_para_plot, "sigla")
     
     return dataframe_plot 
-
-df_guilherme = ler_csv("ed-superior-inep.csv")
-print(merge_bases(df_guilherme, df_guilherme, 7))

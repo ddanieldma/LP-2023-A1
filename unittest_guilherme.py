@@ -30,25 +30,29 @@ df_teste_merge_3 = pd.DataFrame(dados_teste_merge_3)
 class TesteFunções(unittest.TestCase):
 
     def test_função_renomear(self):
-
+        #Comparando bases que devem ser iguais
         base_renomeada = renomear_coluna(df_teste_renomear_1, "SP", "MG")
         pd.testing.assert_frame_equal(base_renomeada, df_teste_renomear_2)
 
     def test_agrup_dados(self):
-        #Não se espera erro
+        #Comparando bases que devem ser iguais
         base_agrupada = agrupamento_de_dados(df_teste_agrupar_1, "sigla", "QT_DOC_EXE")
         pd.testing.assert_frame_equal(base_agrupada, df_teste_agrupar_2)
 
-        output_esperado = "A coluna especificada não existe"
+        #Passando uma coluna que não existe
+        output_esperado = "A coluna especificada não existe ou seus valores não podem ser somados"
         self.assertEqual(agrupamento_de_dados(df_teste_agrupar_1, "silas", "QT_DOC_EXE"), output_esperado)
 
+        #Passando uma coluna cujos valores não podem ser somados
+        output_esperado = "A coluna especificada não existe ou seus valores não podem ser somados"
+        self.assertEqual(agrupamento_de_dados(df_teste_agrupar_1, "QT_DOC_EXE", "siglas"), output_esperado)
+
     def test_merge_bases(self):
-        #Não se espera erro
+        #Comparando bases que devem ser iguais
         base_resultado = merge_bases(df_teste_merge_1, df_teste_merge_2, "ID")
         pd.testing.assert_frame_equal(base_resultado, df_teste_merge_3)
 
-    def test_merge_bases_2(self):
-        #Erro esperado
+        #Passando uma coluna que não existe
         output_esperado = "A coluna especificada não existe"
         self.assertEqual(merge_bases(df_teste_merge_1, df_teste_merge_2, "FGV"), output_esperado)
 
