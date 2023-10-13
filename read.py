@@ -14,9 +14,9 @@ def ler_csv(caminho_csv) -> DataFrame:
     try:
         df = pd.read_csv(caminho_csv, encoding='latin-1', sep = ';')
     except FileNotFoundError:
-        print("Arquivo não encontrado")
+        return "Arquivo não encontrado"
     except ValueError:
-        print("O caminho deve ser uma string")
+        return "O caminho deve ser uma string"
     else:
         return df    
     
@@ -32,12 +32,12 @@ def criar_geometria_brasil(caminho_arq, layer_arq) -> GeoDataFrame:
     :return: GeoDataFrame produzido com base no arquivo
     :rtype: geopandas.GeoDataFrame
     """
-
     try:
         geometria_brasil = gpd.read_file(caminho_arq, layer = layer_arq)
-    except Exception as erro:
-        print("Arquivo não encontrado ou input != string")
-    else:
-        return geometria_brasil
+    except ValueError:
+        return "O arquivo e/ou a coluna layer não existe/existem"
+    except TypeError:
+        return "ambos os valores devem ser strings"
 
-#"bcim_2016_21_11_2018.gpkg", layer = "lim_unidade_federacao_a"
+    return geometria_brasil
+
