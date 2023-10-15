@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 
 from dados_chart_brancos import *
@@ -13,6 +12,8 @@ fig, (ax1, ax2) = plt.subplots(1, 2, subplot_kw=dict(projection="polar"))
 #==================================================================
 # Primeiro plot, para docentes brancos
 ax1.set_title("Porcentagem de docentes brancos", verticalalignment="bottom")
+
+print(type(ax1))
 
 ax1.set_theta_offset(OFFSET_brancos)
 
