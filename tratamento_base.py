@@ -117,4 +117,4 @@ def tratar_base() -> GeoDataFrame:
     #Unir as bases da dados com base na columa "sigla"
     dataframe_plot = merge_bases(geometria_brasil, df_para_plot, "sigla")
     
-    return dataframe_plot 
+    return dataframe_plot

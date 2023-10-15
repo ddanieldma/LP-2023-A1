@@ -9,7 +9,15 @@ from tratamento_base import tratar_base
 def customização_plot() -> None:
     """Função para adicionar as customizações a serem aplicadas no plot
     """
-    plt.title("Número de Docentes de Ensino Superior por Estado ", fontsize=11)
+    plt.title("Número de Docentes de Ensino Superior por Estado ", fontsize=26, color="darkblue", family="arial")
+
+    #remover ticks dos eixos
+    plt.xticks([])
+    plt.yticks([])
+
+    #add cor de fundo
+    plt.gca().set_facecolor('lightblue')
+
 
 
 def plotar_gráfico() -> None:
@@ -30,8 +38,14 @@ def plotar_gráfico() -> None:
                            dataframe_plot.geometry.centroid.y, 
                            dataframe_plot["QT_DOC_EXE"]):
         
+        #pequeno tratamento das cores (branco fica pouco legível no amarelo)
+        if label == 72466:
+            color = "black"
+        else:
+            color = "white"
+        
         try:
-            ax.text(x, y, label, fontsize=8, ha='center', va='center', color='white')
+            ax.text(x, y, label, fontsize=8, ha='center', va='center', color=color)
         except (NameError, ValueError):
             print("variáveis e/ou valores atribuídos não existem (criação do rótulo)")
             sys.exit(1)
