@@ -89,4 +89,4 @@ def cria_base_ordem_crescente(dataframe : pd.DataFrame, index_to_unstack: str ,c
         return dataframe
 
 if __name__ == "__main__":
-    doctest.testmod()
+    doctest.testfile("../doctests.txt", verbose=True)
