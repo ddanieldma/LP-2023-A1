@@ -11,9 +11,22 @@ def check_ethnicity(etnia: str) -> bool:
 	:returns: True se a etnia for válida e False se não for
 	
 	:rtype: bool
+
+	Exemplo:
+	>>> check_ethnicity("amarela")
+	True
+
+	>>> check_ethnicity(2)
+	tipo incorreto
 	"""
 
-	try
+	try:
+		if not isinstance(etnia, str):
+			raise TypeError
+	except TypeError:
+		print("tipo incorreto")
+		return None
+
 
 	etnias_validas = [
 		"branca",
@@ -41,8 +54,9 @@ def get_label_rotation(angle: int, offset: int) -> (int, str):
 	Exemplo:
 	
 	>>> rotacao, alinhamento = get_label_rotation(np.pi, np.pi/2)
-	... rotacao
+	>>> rotacao
 	450.0
+	>>> rotacao, alinhamento = get_label_rotation(np.pi, np.pi/2)
 	>>> alinhamento
 	'right'
 
@@ -89,7 +103,7 @@ def add_labels(angles: np.ndarray, values: np.ndarray, labels: np.ndarray, offse
 	Algum array está vazio
 
 	"""
-
+	
 	try:
 		if ((not(angles.dtype == np.float64)) or (not(values.dtype == np.float64)) or (not(labels.dtype == object)) or (not(isinstance(offset, float)))):
 			raise TypeError
@@ -101,7 +115,7 @@ def add_labels(angles: np.ndarray, values: np.ndarray, labels: np.ndarray, offse
 	except ValueError:
 		print("Algum array está vazio")
 		return None		
-
+	
 	#espaço entre fim da barra e o label
 	padding = 4
 
@@ -121,5 +135,5 @@ def add_labels(angles: np.ndarray, values: np.ndarray, labels: np.ndarray, offse
 			rotation_mode="anchor"
 		)
 
-if __name__ == "__main__":
+if __name__ == "__main__":	
 	doctest.testmod(verbose=True)
