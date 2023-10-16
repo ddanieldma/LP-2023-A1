@@ -20,7 +20,6 @@ Welcome to A1 Linguagens de Programação's documentation!
    modulo_graficos_daniel
    modulo_graficos_guilherme
 
-
 Indices and tables
 ==================
 
