@@ -44,6 +44,8 @@ def plotar_gráfico(dataframe) -> None:
 
     customização_plot()
 
+    plt.savefig("graficos/plot_mapa.png")
+
     plt.show()  # Mostrar o gráfico uma única vez
 
 

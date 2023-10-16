@@ -61,5 +61,4 @@ plt.savefig("graficos/percentuais_de_docentes.png")
 
 datagui = tratar_base(df_ens_sup, geometria_brasil)
 plotar_gráfico(datagui)
-plt.savefig("graficos/plot_mapa.png")
 plt.show()

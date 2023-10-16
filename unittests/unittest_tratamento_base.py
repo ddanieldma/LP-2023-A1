@@ -1,12 +1,14 @@
 '''Módulo destinado a realização do unittest das funções de tratamento de base
 '''
+import os
 import sys
-sys.path.append("../functions/database")
+project_root = os.path.dirname(os.path.dirname(__file__)) 
+sys.path.append(project_root)
+
+from functions.database.tratamento_base import *
 import unittest
 import pandas as pd
-import geopandas as gpd
 import matplotlib.pyplot as plt
-from tratamento_base import *
 
 #criando dataframes para serem utilizados nos testes
 dados_teste_renomear_1 = {"RJ": [1, 2, 3], "SP": [4, 5, 6]}
