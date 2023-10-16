@@ -10,7 +10,7 @@ Welcome to LP-2023-A1's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   selecting_data
 
 Indices and tables
 ==================
