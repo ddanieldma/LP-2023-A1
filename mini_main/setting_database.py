@@ -2,8 +2,9 @@ import sys
 sys.path.append("..\LP-2023-A1")
 import pandas as pd
 import numpy as np
-from plot_functions.plot_kauan import formata_cada_plot
-from clean_functions.utils_kauan import *
+from functions.analyzing.analyzing_functions import *
+from functions.cleaning.cleaning_functions import *
+from functions.plotting.plotting import *
 # from clean_functions.read import ler_csv
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
