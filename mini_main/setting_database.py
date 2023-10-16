@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 from plot_functions.plot_kauan import formata_cada_plot
 from clean_functions.utils_kauan import *
+# from clean_functions.read import ler_csv
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 

@@ -4,8 +4,36 @@ import matplotlib.ticker as mtick
 import matplotlib.pyplot as plt
 import doctest
 
-def ler_csv(caminho_csv):
-    return pd.read_csv(caminho_csv, encoding='latin-1', sep = ';')
+def ler_csv(caminho_csv) -> pd.DataFrame: 
+    """Recebe um arquivo csv e retona um dataframe
+
+    :param str caminho_csv: caminho do arquivo csv
+
+    :return: DataFrame produzido com base no arquivo csv
+    :rtype: pandas.DataFrame
+
+    Exemplo:
+    >>> df = ler_csv("../bases_de_dados/dados_teste.csv")
+    >>> df.head()
+       Estado    DDD
+    0  MG        32
+    1  RJ        21
+    2  SP        11
+
+    >>> ler_csv('arquivo_fake.csv')
+    'Arquivo não encontrado'
+    """
+    try:
+        df = pd.read_csv(caminho_csv, encoding='latin-1', sep = ';')
+    except FileNotFoundError:
+        return "Arquivo não encontrado"
+    except ValueError:
+        return "O caminho deve ser uma string"
+    else:
+        return df    
+
+print(ler_csv("../bases_de_dados/dados_teste.csv"))
+
 
 def removing_list_columns(dataframe: pd.DataFrame, lista: list) -> pd.DataFrame:
     """Essa função serve para remover uma lista de colunas de um dataframe
@@ -238,5 +266,5 @@ def cria_base_ordem_crescente(dataframe : pd.DataFrame, index_to_unstack: str ,c
         # Retornando o Dataframe
         return dataframe
     
-if __name__ == "__main__":
-    doctest.testmod()
+# if __name__ == "__main__":
+#     doctest.testmod()
