@@ -72,7 +72,7 @@ plotar_gráfico(datagui)
 
 #================================================================================
 # plot daniel
-fig, ax = plt.subplots(1, 2, subplot_kw=dict(projection="polar"), figsize=(10, 5))
+fig, ax = plt.subplots(1, 2, subplot_kw=dict(projection="polar"), figsize=(10, 7))
 
 # plot docentes brancos
 docentes_brancos_estado = select_data(df_ens_sup, "branca")
