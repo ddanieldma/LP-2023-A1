@@ -10,9 +10,16 @@ from utils import add_labels
 # definindo multiplos plots circulares
 fig, (ax1, ax2) = plt.subplots(1, 2, subplot_kw=dict(projection="polar"))
 
-def make_plot(dataframe: pd.DataFrame, title: str, etnia: int, axes: np.ndarray) -> None:
+def make_plot(dataframe: pd.DataFrame, title: str, etnia: int, axes) -> None:
+	""" Cria a estrutura do plot dentro de um axes, que é um subplot que vai ser utilizado no gridplot final.
+
+	:param pd.DataFrame dataframe: dataframe com os dados
+	:param str title: título do subplot
+	:param str etnia: etnia para a qual o plot será feito
+	:param matplotlib.projections.polar.PolarAxes axes 
+	"""
 	etnia = etnia.upper()
-	
+
 	dataframe_sorted = (
 		dataframe
 		.groupby(["NO_REGIAO_IES"])

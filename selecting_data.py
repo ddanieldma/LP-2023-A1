@@ -5,10 +5,15 @@ from read import base_inep
 
 from utils import *
 
-def selecting_data(dataframe: pd.DataFrame, etnia: str) -> pd.DataFrame:
-	"""Seleciona os dados para a raça escolhida
+def select_data(dataframe: pd.DataFrame, etnia: str) -> pd.DataFrame:
+	"""Seleciona na base os dados relatvios à etnia escolhida
 
-	:param pd.DataFrame dataframe
+	:param pd.DataFrame dataframe: base de dados
+	:param str etnia: a etnia para a qual os dados serão selecionados na base
+
+	:returns: um dataframe somente com as colunas necessárias para o plot
+	
+	:rtype: pd.DataFrame
 	"""
 	
 	try:

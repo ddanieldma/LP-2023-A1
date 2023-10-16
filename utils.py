@@ -82,8 +82,8 @@ def get_label_rotation(angle: int, offset: int) -> (int, str):
 	return rotation, alignment
 
 # Função que adiciona os labels
-def add_labels(angles: np.ndarray, values: np.ndarray, labels: np.ndarray, offset: np.ndarray, ax ) -> None:
-	"""Função auxiliar que adiciona os labels no plot
+def add_labels(angles: np.ndarray, values: np.ndarray, labels: np.ndarray, offset: np.ndarray, ax) -> None:
+	"""Função auxiliar que adiciona os labels no plot circular
 
 	:param list angles: lista de ângulos
 	:param list values: lista de alturas dos labels
@@ -96,10 +96,11 @@ def add_labels(angles: np.ndarray, values: np.ndarray, labels: np.ndarray, offse
 	Algum parâmetro tem o tipo incorreto
 
 	>>> angles = np.array([1.2])
-	>>> values = np.array([1.2])
-	>>> labels = np.array([1.2])
+	>>> values = np.array([])
+	>>> labels = np.array(['coisa'])
+	>>> labels = labels.astype(object)
 	>>> fig, ax = plt.subplots(figsize=(20, 10))
-	>>> add_labels(angles, values, labels, 0, ax)
+	>>> add_labels(angles, values, labels, 0.5, ax)
 	Algum array está vazio
 
 	"""
