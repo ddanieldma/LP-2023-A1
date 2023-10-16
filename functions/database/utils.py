@@ -12,6 +12,7 @@ def check_ethnicity(etnia: str) -> bool:
 	:rtype: bool
 
 	Exemplo:
+
 	>>> check_ethnicity("amarela")
 	True
 
@@ -88,6 +89,7 @@ def add_labels(angles: np.ndarray, values: np.ndarray, labels: np.ndarray, offse
 	:param matplotlib.projections.polar.PolarAxesSubplot ax: objeto que contém o plot circular
 
 	Exemplo:
+	
 	>>> add_labels(5, 6, 7, 8, 9)
 	'Algum parâmetro tem o tipo incorreto'
 

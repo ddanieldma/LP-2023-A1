@@ -20,6 +20,7 @@ def renomear_coluna(df, nome_antigo, nome_novo) -> DataFrame:
     :rtype: pandas.DataFrame
     
     Exemplo:
+    
     >>> dados = {'RJ': [1, 2, 3], 'SP': [4, 5, 6]}
     >>> df = pd.DataFrame(data)
     >>> df = renomear_coluna(df, 'SP', 'MG')
@@ -43,6 +44,7 @@ def agrupamento_de_dados(df, coluna_base, coluna_valores) -> DataFrame:
     :rtype: pandas.DataFrame
 
     Exemplo:
+
     >>> dados = {'sigla': ['SP', 'RJ', 'SP', 'RJ'], 'QT_DOC_EXE': [100, 200, 150, 250]}
     >>> df = pd.DataFrame(dados)
     >>> resultado = agrupamento_de_dados(df, 'sigla', 'QT_DOC_EXE')
@@ -69,6 +71,7 @@ def merge_bases(df1, df2, coluna) -> GeoDataFrame:
     :rtype: geopandas.GeoDataFrame
 
     Exemplo:
+
     >>> dados1 = {'ID': [1, 2, 3], 'Estados: ['MG', 'RJ', 'SP']}
     >>> dados2 = {'ID': [1, 2, 3], 'Área': [50000, 10000, 70000]}
     >>> df1 = pd.DataFrame(dados1)

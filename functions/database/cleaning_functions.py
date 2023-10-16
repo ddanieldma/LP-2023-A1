@@ -15,6 +15,7 @@ def ler_csv(caminho_csv) -> pd.DataFrame:
     :rtype: pandas.DataFrame
 
     Exemplo:
+
     >>> df = ler_csv("bases_de_dados/dados_teste.csv")
     >>> df.head()
       Estado  DDD
@@ -66,6 +67,7 @@ def removing_list_columns(dataframe: pd.DataFrame, lista: list) -> pd.DataFrame:
     :rtype: pd.DataFrame
 
     Exemplo:
+
     >>> dados = {"RJ": [1, 2, 3], "SP": [4, 5, 6]}
     >>> df = pd.DataFrame(dados)
     >>> df = removing_list_columns(df, ["SP"])
@@ -114,6 +116,8 @@ def removing_columns_from_to(dataframe: pd.DataFrame, start_col: str, end_col: s
 
     :returns: Dataframe removendo-se todas as colunas entre as colunas especificadas
     :rtype: pd.DataFrame 
+
+
     >>> dados = {"RJ": [1, 2, 3], "SP": [4, 5, 6], "RS":[7, 8, 9], "SC":[10, 11, 12]}
     >>> df = pd.DataFrame(dados)
     >>> df = removing_columns_from_to(df, "RJ", "RS")
@@ -130,6 +134,7 @@ def removing_columns_from_to(dataframe: pd.DataFrame, start_col: str, end_col: s
     >>> df2 = ["SP", "RS", "SC", "RJ"]
     >>> removing_columns_from_to(df2, "SP", "RS")
     "Houve um erro. Por favor, tente novamente:'list' object has no attribute 'columns'"
+
     >>> 
     """
     try:
@@ -168,7 +173,9 @@ def type_of_university(dataframe: pd.DataFrame, column: str = "TP_CATEGORIA_ADMI
 
     :return: Dataframe com uma coluna adicionada, informando se a escola é pública ou privada
     :rtype: pd.DataFrame
+    
     Exemplo:
+
     >>> dados = {"Universidade": ["UFRJ", "FGV", "PUC"], "TP_CATEGORIA_ADMINISTRATIVA": [1, 5, 6]}
     >>> df = pd.DataFrame(dados)
     >>> df = type_of_university(df)

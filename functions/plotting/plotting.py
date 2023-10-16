@@ -15,7 +15,8 @@ def formata_cada_plot(dataframe: pd.DataFrame, title: str, numberplot: int, axis
 
     :rype: None
     
-    Exemplo 
+    Exemplo:
+    
     >>> axes = plt.subplots(1, 3, figsize=(15, 5))
     >>> data = pd.DataFrame({"RJ":[1,2,3]})
 
