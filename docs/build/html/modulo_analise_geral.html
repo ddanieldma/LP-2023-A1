@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Funções Análise Geral &#8212; A1 Linguagens de Programação 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Funções Análise Daniel" href="modulo_analise_daniel.html" />
+    <link rel="prev" title="Welcome to A1 Linguagens de Programação’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-database.read">
+<span id="funcoes-analise-geral"></span><h1>Funções Análise Geral<a class="headerlink" href="#module-database.read" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="database.read.criar_geometria_brasil">
+<span class="sig-prename descclassname"><span class="pre">database.read.</span></span><span class="sig-name descname"><span class="pre">criar_geometria_brasil</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">caminho_arq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_arq</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">GeoDataFrame</span></span></span><a class="headerlink" href="#database.read.criar_geometria_brasil" title="Link to this definition">¶</a></dt>
+<dd><p>Recebe um arquivo e retona um geodataframe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>caminho_csv</strong> (<em>str</em>) – caminho do arquivo .gpkg</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>GeoDataFrame produzido com base no arquivo</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>geopandas.GeoDataFrame</p>
+</dd>
+</dl>
+<p>Exemplo:
+&gt;&gt;&gt; gdf = criar_geometria_brasil(“dados.gpkg”, “Estado”)
+&gt;&gt;&gt; gdf.head()</p>
+<blockquote>
+<div><p>Estado    Geometria</p>
+</div></blockquote>
+<p>0  MG        10.91231, -98,31233
+1  RJ        98.19123, 45,12930
+2  SP        56.19234, -90.49384</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gdf</span> <span class="o">=</span> <span class="n">criar_geometria_brasil</span><span class="p">(</span><span class="s2">&quot;dados.gpkg&quot;</span><span class="p">,</span> <span class="s2">&quot;Estado&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="gr">KeyError</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="database.read.ler_csv">
+<span class="sig-prename descclassname"><span class="pre">database.read.</span></span><span class="sig-name descname"><span class="pre">ler_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">caminho_csv</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#database.read.ler_csv" title="Link to this definition">¶</a></dt>
+<dd><p>Recebe um arquivo csv e retona um dataframe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>caminho_csv</strong> (<em>str</em>) – caminho do arquivo csv</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame produzido com base no arquivo csv</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<p>Exemplo:
+&gt;&gt;&gt; df = ler_csv(“dados.csv”)
+&gt;&gt;&gt; df.head()</p>
+<blockquote>
+<div><p>Estado    DDD</p>
+</div></blockquote>
+<p>0  MG        32
+1  RJ        21
+2  SP        11</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ler_csv</span><span class="p">(</span><span class="s1">&#39;arquivo_fake.csv&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="gr">FileNotFoundError</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">A1 Linguagens de Programação</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Funções Análise Geral</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#database.read.criar_geometria_brasil"><code class="docutils literal notranslate"><span class="pre">criar_geometria_brasil()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database.read.ler_csv"><code class="docutils literal notranslate"><span class="pre">ler_csv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_analise_daniel.html">Funções Análise Daniel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_analise_guilherme.html">Funções Análise Guilherme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_analise_kauan.html">Funções Análise Kauan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_cleaning_kauan.html">Funções Limpeza da base Kauan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_cleaning_guilherme.html">Funções Limpeza da base Kauan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_graficos_kauan.html">Funções Cria Gráfico Kauan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_graficos_daniel.html">Funções Cria Gráfico Daniel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_graficos_guilherme.html">Funções Cria Gráfico Guilherme</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to A1 Linguagens de Programação’s documentation!</a></li>
+      <li>Next: <a href="modulo_analise_daniel.html" title="next chapter">Funções Análise Daniel</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Daniel, Guilherme e Kauan.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/modulo_analise_geral.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
