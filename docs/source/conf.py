@@ -1,3 +1,5 @@
+import sys
+import os
 # Configuration file for the Sphinx documentation builder.
 #
 # For the full list of built-in configuration values, see the documentation:
@@ -6,21 +8,21 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Trabalho A1 Linguagem de Programação'
-copyright = '2023, Daniel de Miranda Almeida, Guilherme Cunha Carvalho, Kauan Mariani Ferreira'
-author = 'Daniel de Miranda Almeida, Guilherme Cunha Carvalho, Kauan Mariani Ferreira'
+project = 'A1 Linguagens de Programação'
+copyright = '2023, Daniel, Guilherme e Kauan'
+author = 'Daniel, Guilherme e Kauan'
 release = '0.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'sphinx.ext.duration',
-    'sphinx.ext.doctest',
-    'sphinx.ext.autodoc',
-    ]
+    'sphinx.ext.autodoc'
+]
 
-templates_path = ['_templates']
+sys.path.insert(0, os.path.abspath("../../functions"))
+
+templates_path = ['sphinx_rtd_theme']
 exclude_patterns = []
 
 

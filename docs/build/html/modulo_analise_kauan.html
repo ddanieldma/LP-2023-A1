@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Funções Análise Kauan &#8212; A1 Linguagens de Programação 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Funções Limpeza da base Kauan" href="modulo_cleaning_kauan.html" />
+    <link rel="prev" title="Welcome to A1 Linguagens de Programação’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-database.analyzing_functions">
+<span id="funcoes-analise-kauan"></span><h1>Funções Análise Kauan<a class="headerlink" href="#module-database.analyzing_functions" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="database.analyzing_functions.cria_base_ordem_crescente">
+<span class="sig-prename descclassname"><span class="pre">database.analyzing_functions.</span></span><span class="sig-name descname"><span class="pre">cria_base_ordem_crescente</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_to_unstack</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_porcentagem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#database.analyzing_functions.cria_base_ordem_crescente" title="Link to this definition">¶</a></dt>
+<dd><p>Função que ordena os dados em ordem crescente, por UF, da menor soma de porcentagem até a maior</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pd.DataFrame</em>) – O dataframe o qual queremos ordenar</p></li>
+<li><p><strong>index_to_unstack</strong> (<em>str</em>) – O multindex que será descompactado para formar uma nova coluna</p></li>
+<li><p><strong>col_porcentagem</strong> (<em>str</em>) – A coluna a qual será a base da sua ordenação</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>O dataframe com os estados em ordem crescente da coluna que você especificou</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dados</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;PCT_DOUT_TOTAL&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span> <span class="s1">&#39;Privada&#39;</span><span class="p">):</span> <span class="mf">5.219985085756898</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span> <span class="s1">&#39;Pública&#39;</span><span class="p">):</span> <span class="mf">38.92617449664429</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;AL&#39;</span><span class="p">,</span> <span class="s1">&#39;Privada&#39;</span><span class="p">):</span> <span class="mf">10.928853754940711</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;AL&#39;</span><span class="p">,</span> <span class="s1">&#39;Pública&#39;</span><span class="p">):</span> <span class="mf">32.055335968379445</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;AM&#39;</span><span class="p">,</span> <span class="s1">&#39;Privada&#39;</span><span class="p">):</span> <span class="mf">7.8463800073502386</span><span class="p">}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dados</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">([</span><span class="s2">&quot;SG_UF_IES&quot;</span><span class="p">,</span> <span class="s2">&quot;Tipo de Universidade&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cria_base_ordem_crescente</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;Tipo de Universidade&quot;</span><span class="p">,</span> <span class="s2">&quot;qualquer_nome&quot;</span><span class="p">)</span>
+<span class="go">&#39;O nome do index ou da coluna não existe no dataframe&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cria_base_ordem_crescente</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">&#39;O(s) nome(s) da(s) coluna(s) que você passou não é uma string&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="database.analyzing_functions.cria_porcentagem">
+<span class="sig-prename descclassname"><span class="pre">database.analyzing_functions.</span></span><span class="sig-name descname"><span class="pre">cria_porcentagem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nome_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_doc_esp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_por_UF</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#database.analyzing_functions.cria_porcentagem" title="Link to this definition">¶</a></dt>
+<dd><p>Cria uma coluna porcentagem com base em outras colunas do dataframe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pd.DataFrame</em>) – O dataframe do qual se deseja adicionar a coluna com a porcentagem</p></li>
+<li><p><strong>nome_col</strong> (<em>str</em>) – O nome da coluna que queremos adicionar</p></li>
+<li><p><strong>num_doc_esp</strong> (<em>str</em>) – O nome da coluna a qual desejamos saber a porcentagem</p></li>
+<li><p><strong>total_por_UF</strong> (<em>pd.DataFrame</em>) – Dataframe com o total de docentes por UF</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>O dataframe com uma coluna a mais com a a porcentagem devida</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dados</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;QT_DOC_TOTAL&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span> <span class="s1">&#39;Privada&#39;</span><span class="p">):</span> <span class="mi">339</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span> <span class="s1">&#39;Pública&#39;</span><span class="p">):</span> <span class="mi">1002</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;AL&#39;</span><span class="p">,</span> <span class="s1">&#39;Privada&#39;</span><span class="p">):</span> <span class="mi">2370</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;AL&#39;</span><span class="p">,</span> <span class="s1">&#39;Pública&#39;</span><span class="p">):</span> <span class="mi">2690</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;AM&#39;</span><span class="p">,</span> <span class="s1">&#39;Privada&#39;</span><span class="p">):</span> <span class="mi">2088</span><span class="p">},</span> <span class="s1">&#39;QT_DOC_EX_DOUT&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span> <span class="s1">&#39;Privada&#39;</span><span class="p">):</span> <span class="mi">70</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;AC&#39;</span><span class="p">,</span> <span class="s1">&#39;Pública&#39;</span><span class="p">):</span> <span class="mi">522</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;AL&#39;</span><span class="p">,</span> <span class="s1">&#39;Privada&#39;</span><span class="p">):</span> <span class="mi">553</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;AL&#39;</span><span class="p">,</span> <span class="s1">&#39;Pública&#39;</span><span class="p">):</span> <span class="mi">1622</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;AM&#39;</span><span class="p">,</span> <span class="s1">&#39;Privada&#39;</span><span class="p">):</span> <span class="mi">427</span><span class="p">}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dados</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">([</span><span class="s2">&quot;SG_UF_IES&quot;</span><span class="p">,</span> <span class="s2">&quot;Tipo de Universidade&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">total_doc_por_UF</span> <span class="o">=</span> <span class="n">total_doc_por_UF</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">&#39;SG_UF_IES&#39;</span><span class="p">)[</span><span class="s1">&#39;QT_DOC_TOTAL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cria_porcentagem</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;PCT_DOC_TOT&quot;</span><span class="p">,</span> <span class="s2">&quot;nome_aleatorio&quot;</span><span class="p">,</span> <span class="n">total_doc_por_UF</span><span class="p">)</span>
+<span class="go">&#39;O nome da coluna não existe&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cria_porcentagem</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;PCT_DOC_TOT&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">total_doc_por_UF</span><span class="p">)</span>
+<span class="go">&#39;O nome da coluna não é uma string&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">A1 Linguagens de Programação</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Funções Análise Kauan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#database.analyzing_functions.cria_base_ordem_crescente"><code class="docutils literal notranslate"><span class="pre">cria_base_ordem_crescente()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database.analyzing_functions.cria_porcentagem"><code class="docutils literal notranslate"><span class="pre">cria_porcentagem()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_cleaning_kauan.html">Funções Limpeza da base Kauan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_graficos_kauan.html">Funções Cria Gráfico Kauan</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to A1 Linguagens de Programação’s documentation!</a></li>
+      <li>Next: <a href="modulo_cleaning_kauan.html" title="next chapter">Funções Limpeza da base Kauan</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Daniel, Guilherme e Kauan.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/modulo_analise_kauan.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
