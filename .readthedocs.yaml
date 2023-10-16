@@ -8,10 +8,6 @@ version: 2
 python: 
   install:
     - requirements: requirements.txt
-    - method: pip
-      path: .
-      extra_requirements:
-        - docs
 
 # Set the OS, Python version and other tools you might need
 build:
