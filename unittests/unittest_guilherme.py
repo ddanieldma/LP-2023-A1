@@ -1,6 +1,7 @@
 '''Módulo destinado a realização do unittest das funções de tratamento de base
 '''
-
+import sys
+sys.path.append("../functions/database")
 import unittest
 import pandas as pd
 import geopandas as gpd
