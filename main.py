@@ -1,17 +1,26 @@
 import sys
 sys.path.append("..\LP-2023-A1")
+
 import pandas as pd
 import numpy as np
-from functions.database.analyzing_functions import *
-from functions.database.cleaning_functions import *
-from functions.plotting.plotting import *
-from functions.database.tratamento_base import *
-from functions.plotting.plot_guilherme import *
-from functions.database.read import *
-# from clean_functions.read import ler_csv
+
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 
+# plot kauan
+from functions.database.analyzing_functions import *
+from functions.database.cleaning_functions import *
+from functions.plotting.plotting import *
+
+# plot guilherme
+from functions.database.tratamento_base import *
+from functions.plotting.plot_guilherme import *
+
+# plot daniel
+from functions.database.selecting_data import select_data
+from functions.plotting.circular_chart import make_plot
+
+from functions.database.read import *
 
 # Lendo csv
 df_ens_sup = ler_csv("bases_de_dados/ed-superior-inep.csv")
@@ -61,4 +70,17 @@ plt.savefig("graficos/percentuais_de_docentes.png")
 
 datagui = tratar_base(df_ens_sup, geometria_brasil)
 plotar_gráfico(datagui)
-plt.show()
+
+#================================================================================
+# plot daniel
+fig, (ax1, ax2) = plt.subplots(1, 2, subplot_kw=dict(projection="polar"))
+
+# plot docentes brancos
+docentes_brancos_estado = select_data(df_ens_sup, "branca")
+make_plot(docentes_brancos_estado, "Porcentagem de docentes brancos", "branca", ax1)
+
+# plot docentes negros
+docentes_negros_estado = select_data(df_ens_sup, "negra")
+make_plot(docentes_negros_estado, "Porcentagem de docentes negros", "negra", ax2)
+
+plt.savefig("graficos/percentuais_docentes_raca.png")

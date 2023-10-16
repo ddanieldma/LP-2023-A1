@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib
 import doctest
 
 def check_ethnicity(etnia: str) -> bool:

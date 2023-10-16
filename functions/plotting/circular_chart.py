@@ -2,10 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# from dados_chart_brancos import *
-# from dados_chart_negros import *
-
-from utils import *
+from functions.database.utils import *
 
 # definindo multiplos plots circulares
 fig, (ax1, ax2) = plt.subplots(1, 2, subplot_kw=dict(projection="polar"))

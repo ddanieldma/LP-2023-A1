@@ -1,9 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from read import base_inep
-
-from utils import *
+from functions.database.utils import *
 
 def select_data(dataframe: pd.DataFrame, etnia: str) -> pd.DataFrame:
 	"""Seleciona na base os dados relatvios à etnia escolhida
