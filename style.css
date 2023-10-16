@@ -24,9 +24,15 @@ body {
     align-items: center;
 }
 
+.texto-header {
+    margin: 2px;
+}
+
 .grafico {
     margin: 10px;
     
+    width: 95vw;
+
     border-radius: 4%;
     
     display: flex;
