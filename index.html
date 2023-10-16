@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel= "stylesheet" type= "text/css" href= "style.css" >
+    
+    <title>A1 - LP</title>
+</head>
+<body>
+    <div class="content">
+        <div class="header">
+            <h1>
+              A1 - Linguagens de programação
+            </h1>
+            <h2>
+              Grupo:
+            </h2>
+            <h3>
+              Daniel de Miranda Almeida
+            </h3>
+            <h3>
+              Guilherme Carvalho Cunha
+            </h3>
+            <h3>
+              Kauan Mariani Ferreira
+            </h3>
+        </div>
+
+      <div class="grafico">
+        <div class="texto-grafico">
+            <p class="p-texto-grafico">
+              A análise foi feita buscando encontrar as possíveis discrepâncias nas quantidades de docentes negros (pretos e pardos) e brancos nas instituições de ensino públicas e privadas do país.
+            </p>
+            <p class="p-texto-grafico">
+              É possível perceber pelo gráfico que nas regiões nordeste (em laranja) e norte (em verde) não existem diferenças muito grandes nas quantidades de docentes das diferentes etnias. Ao passo que, nas outras regiões, principalmente na Sul, existe uma diferença grande que pode se tornar de até 80%, no caso do estado do Rio Grande do Sul.
+            </p>
+            <p class="p-texto-grafico">
+              Os dados para outras etnias foram omitidos para melhorar.
+            </p>
+        </div>
+        <div class="imagem-grafico">
+            <img src="graficos/percentuais_docentes_raca.png" alt="Visualização de porcentagem de docentes por raça e por estado">
+        </div>
+      </div>
+
+      <div class="grafico">
+        <div class="texto-grafico">
+            <p class="p-texto-grafico">
+              A ideia por trás da análise foi analisar o grau de especialização de docentes por UF. Gostaríamos de saber como se da a distribuição do Brasil em relação ao tipo de especialização de professores, por estado.
+            </p>
+
+            <p class="p-texto-grafico">
+              Vemos que em toda a rede pública a maior parte dos professores tem doutorado. O estado do Rio de Janeiro se destaca nesse quesito, tendo quase 60% de todos os docentes do estado sendo doutores. O estado que menos possui proporcionalmente doutores é o estado de Rondonia.
+            </p>
+                
+            <p class="p-texto-grafico">
+              No quesito de ter apenas uma especialização, i.e uma pos graduação que não seja doutorado, o Top 3 fica com matogrosso e amapá, os quais ficam com cerca de 30% de seus docentes sem um doutorado/mestrado.
+            </p>
+                
+            <p class="p-texto-grafico">
+              Esse dado, revele como estados periféricos (fora do centro) acabam tendo um grau de especialização de docentes bem menor, levando a consequências problemáticas em termos da educação.
+            </p>
+        </div>
+        <div class="imagem-grafico">
+            <img src="graficos/percentuais_de_docentes.png" alt="">
+        </div>
+      </div>
+
+      <div class="grafico">
+        <div class="texto-grafico">
+            <p>Observando a base e encarando a possibilidade de fazer uma visualização dividida por estados, concluí que um plot de mapa seria interessante para essa ocasião. Desse modo, foi necessária a importação da biblioteca geopandas e a leitura de um arquivo que contenha as dimensões (geometria) dos estados brasileiros.</p>
+            <p>O resultado foi um gráfico que apresenta a quantidade de docentes no ensino superior dividido por estado.</p>
+            <p>Analisando o plot, podemos observar a já esperada predominância numérica dos estados do sul e do eixo, resultado de uma concentração populacional e de investimento. 
+            Essa disparidade é tão grande, que apenas São Paulo possui mais profissionais que toda a região norte ou centro-oeste somadas.</p>
+        </div>
+        <div class="imagem-grafico">
+            <img src="graficos/plot_mapa.png" alt="Visualização de porcentagem de docentes por raça e por estado">
+        </div>
+      </div>
+    </div>
+      
+    <div class="footer">
+      <p>2023, Daniel de Miranda Almeida, Guilherme Cunha Carvalho, Kauan Mariani Ferreira™</p>
+      <h2>Powered by Hotel 1900</h2>
+    </div>
+</body>
+</html>
