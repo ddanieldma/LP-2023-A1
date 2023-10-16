@@ -5,7 +5,7 @@ import pandas as pd
 # from dados_chart_brancos import *
 # from dados_chart_negros import *
 
-from utils import add_labels
+from utils import *
 
 # definindo multiplos plots circulares
 fig, (ax1, ax2) = plt.subplots(1, 2, subplot_kw=dict(projection="polar"))
@@ -16,8 +16,28 @@ def make_plot(dataframe: pd.DataFrame, title: str, etnia: int, axes) -> None:
 	:param pd.DataFrame dataframe: dataframe com os dados
 	:param str title: título do subplot
 	:param str etnia: etnia para a qual o plot será feito
-	:param matplotlib.projections.polar.PolarAxes axes 
+	:param matplotlib.projections.polar.PolarAxes axes
+
+	Exemplo:
+	>>> df = pd.DataFrame({"RJ": [1, 2, 3]})
+	>>> fig, ax = plt.subplots(2)
+	>>> make_plot(df, "titulo", "caju", ax)
+	'etnia invalida'
+
+	>>> make_plot(df, "titulo", 5, ax)
+	'o titulo e a etnia precisam de ser strings'
 	"""
+	
+	try:
+		if not check_ethnicity(etnia):
+			raise ValueError
+		if not isinstance(etnia, str) or not isinstance(title, str):
+			raise TypeError
+	except ValueError:
+		return "etnia invalida" 
+	except TypeError:
+		return "o titulo e a etnia precisam de ser strings"
+	
 	etnia = etnia.upper()
 
 	dataframe_sorted = (
@@ -47,7 +67,7 @@ def make_plot(dataframe: pd.DataFrame, title: str, etnia: int, axes) -> None:
 		IDXS += list(range(offset + PADDING, offset + tamanho + PADDING))
 		offset += tamanho + PADDING
 
-	axes.set_title(title, verticalalignment="bottom")
+	axes.set_title(title, verticalalignment="bottom", fontsize=10)
 
 	axes.set_theta_offset(OFFSET)
 
@@ -58,9 +78,9 @@ def make_plot(dataframe: pd.DataFrame, title: str, etnia: int, axes) -> None:
 	axes.xaxis.grid(False)
 	axes.yaxis.grid(False)
 	axes.set_xticks([])
-	axes.set_rlabel_position(-355)
+	axes.set_rlabel_position(-347)
 	axes.set_yticks([20, 40, 60, 80, 100])
-	axes.set_yticklabels(["20%", "40%", "60%", "80%", "100%"], fontsize=9)
+	axes.set_yticklabels(["20%", "40%", "60%", "80%", "100%"], fontsize=5)
 
 	COLORS = [f"C{i}" for i, tamanho in enumerate(GROUPS_SIZE) for _ in range(tamanho)]
 
@@ -90,3 +110,6 @@ def make_plot(dataframe: pd.DataFrame, title: str, etnia: int, axes) -> None:
 		axes.plot(x2, [100] * 50, color="#bebebe", lw=0.8)
 
 		offset += tamanho + PADDING
+
+if __name__ == "__main__":
+	doctest.testmod(verbose=True)

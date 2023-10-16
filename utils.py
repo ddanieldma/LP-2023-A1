@@ -17,15 +17,14 @@ def check_ethnicity(etnia: str) -> bool:
 	True
 
 	>>> check_ethnicity(2)
-	tipo incorreto
+	'tipo incorreto'
 	"""
 
 	try:
 		if not isinstance(etnia, str):
 			raise TypeError
 	except TypeError:
-		print("tipo incorreto")
-		return None
+		return "tipo incorreto"
 
 
 	etnias_validas = [
@@ -56,12 +55,11 @@ def get_label_rotation(angle: int, offset: int) -> (int, str):
 	>>> rotacao, alinhamento = get_label_rotation(np.pi, np.pi/2)
 	>>> rotacao
 	450.0
-	>>> rotacao, alinhamento = get_label_rotation(np.pi, np.pi/2)
 	>>> alinhamento
 	'right'
 
 	>>> get_label_rotation("123", "123")
-	Tipo incorreto
+	'Tipo incorreto'
 	"""
 
 	try:
@@ -70,8 +68,7 @@ def get_label_rotation(angle: int, offset: int) -> (int, str):
 		elif not(isinstance(offset, int) or isinstance(offset, float)):
 			raise TypeError
 	except TypeError:
-		print("Tipo incorreto")
-		return None
+		return "tipo incorreto"
 
 	rotation = np.rad2deg(angle + offset)
 	if angle <= np.pi:
@@ -93,7 +90,7 @@ def add_labels(angles: np.ndarray, values: np.ndarray, labels: np.ndarray, offse
 
 	Exemplo:
 	>>> add_labels(5, 6, 7, 8, 9)
-	Algum parâmetro tem o tipo incorreto
+	'Algum parâmetro tem o tipo incorreto'
 
 	>>> angles = np.array([1.2])
 	>>> values = np.array([])
@@ -101,7 +98,7 @@ def add_labels(angles: np.ndarray, values: np.ndarray, labels: np.ndarray, offse
 	>>> labels = labels.astype(object)
 	>>> fig, ax = plt.subplots(figsize=(20, 10))
 	>>> add_labels(angles, values, labels, 0.5, ax)
-	Algum array está vazio
+	'Algum array está vazio'
 
 	"""
 	
@@ -111,11 +108,9 @@ def add_labels(angles: np.ndarray, values: np.ndarray, labels: np.ndarray, offse
 		if angles.size == 0 or values.size == 0 or labels.size == 0:
 			raise ValueError
 	except (TypeError, AttributeError):
-		print("Algum parâmetro tem o tipo incorreto")
-		return None
+		return "Algum parâmetro tem o tipo incorreto"
 	except ValueError:
-		print("Algum array está vazio")
-		return None		
+		return "Algum array está vazio"		
 	
 	#espaço entre fim da barra e o label
 	padding = 4

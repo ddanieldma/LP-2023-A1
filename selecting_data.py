@@ -14,14 +14,25 @@ def select_data(dataframe: pd.DataFrame, etnia: str) -> pd.DataFrame:
 	:returns: um dataframe somente com as colunas necessárias para o plot
 	
 	:rtype: pd.DataFrame
+
+	Exemplo:
+	>>> df = pd.DataFrame({"RJ": [1, 2, 3]})
+	>>> select_data(df, "caju")
+	'etnia invalida'
+
+	>>> select_data(df, 5)
+	'a etnia precisa de ser uma string'
 	"""
 	
 	try:
 		if not check_ethnicity(etnia):
 			raise ValueError
+		if not isinstance(etnia, str):
+			raise TypeError
 	except ValueError:
-		print("Etnia inválida")
-		return None
+		return "etnia invalida" 
+	except TypeError:
+		return "a etnia precisa de ser uma string"
 
 	etnia = etnia.upper()
 
@@ -47,3 +58,6 @@ def select_data(dataframe: pd.DataFrame, etnia: str) -> pd.DataFrame:
 		docentes_raca_estado[etnia + "_RELACAO"] = (docentes_raca_estado["QT_DOC_EX_" + etnia]/ docentes_raca_estado["QT_DOC_EXE"]) * 100
 
 	return docentes_raca_estado
+
+if __name__ == "__main__":
+	doctest.testmod(verbose=True)

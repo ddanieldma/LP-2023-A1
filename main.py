@@ -20,4 +20,4 @@ make_plot(docentes_brancos_estado, "Porcentagem de docentes brancos", "branca", 
 docentes_negros_estado = select_data(base_inep, "negra")
 make_plot(docentes_negros_estado, "Porcentagem de docentes negros", "negra", ax2)
 
-plt.show()
+plt.savefig("circular_chart.png")
