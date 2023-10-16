@@ -1,14 +1,17 @@
 '''Módulo que trata a base
 '''
-
 import sys
+import os
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+sys.path.append(project_root)
+
 import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
 from pandas import DataFrame
 from geopandas import GeoDataFrame
-from read import *
-from utils import *
+from functions.database.read import *
+from functions.database.utils import *
 
 def renomear_coluna(df, nome_antigo, nome_novo) -> DataFrame:
     """Renomeia a coluna desejada.
@@ -22,14 +25,14 @@ def renomear_coluna(df, nome_antigo, nome_novo) -> DataFrame:
     
     Exemplo:
 
-    >>> dados = {'RJ': [1, 2, 3], 'SP': [4, 5, 6]}
+    >>> data = {'RJ': [1, 2, 3], 'SP': [4, 5, 6]}
     >>> df = pd.DataFrame(data)
     >>> df = renomear_coluna(df, 'SP', 'MG')
     >>> df
-       RJ MG
-    0  1  4
-    1  2  5
-    2  3  6
+       RJ  MG
+    0   1   4
+    1   2   5
+    2   3   6
     """
     df.rename(columns={nome_antigo: nome_novo}, inplace=True)
     return df
@@ -51,8 +54,8 @@ def agrupamento_de_dados(df, coluna_base, coluna_valores) -> DataFrame:
     >>> resultado = agrupamento_de_dados(df, 'sigla', 'QT_DOC_EXE')
     >>> resultado
       sigla  QT_DOC_EXE
-    0    SP        250
-    1    RJ        450
+    0    RJ         450
+    1    SP         250
     """
     try:
         df_para_plot = df.groupby(coluna_base)[coluna_valores].sum().reset_index()
@@ -79,10 +82,10 @@ def merge_bases(df1, df2, coluna) -> GeoDataFrame:
     >>> df2 = pd.DataFrame(dados2)
     >>> resultado = merge_bases(df1, df2, 'ID')
     >>> resultado
-       ID   Estados  Área
-    0   1        MG  50000
-    1   2        RJ  10000
-    2   3        SP  70000
+       ID Estados   Área
+    0   1      MG  50000
+    1   2      RJ  10000
+    2   3      SP  70000
     """
 
     try:
@@ -110,6 +113,6 @@ def tratar_base(dataframe, geom_br) -> GeoDataFrame:
     return dataframe_plot
 
 if __name__ == "__main__":
-    doctest.testfile("../doctests.txt", verbose=True)
+    doctest.testmod()
 
     

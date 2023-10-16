@@ -1,6 +1,11 @@
 ''' Módulo destinado a realizar os unittest das funções de leitura de arquivos
 '''
 
+import sys
+import os
+project_root = os.path.dirname(os.path.dirname(__file__)) 
+sys.path.append(project_root)
+
 import unittest
 import geopandas as gpd
 import pandas as pd

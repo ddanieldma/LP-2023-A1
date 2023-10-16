@@ -16,7 +16,7 @@ def formata_cada_plot(dataframe: pd.DataFrame, title: str, numberplot: int, axis
     :rype: None
     
     Exemplo:
-    
+
     >>> axes = plt.subplots(1, 3, figsize=(15, 5))
     >>> data = pd.DataFrame({"RJ":[1,2,3]})
 
@@ -54,4 +54,4 @@ def formata_cada_plot(dataframe: pd.DataFrame, title: str, numberplot: int, axis
         return "O número do plot não existe"
 
 if __name__ == "__main__":
-    doctest.testfile("../doctests_plotting.txt", )
+	doctest.testmod()

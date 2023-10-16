@@ -22,7 +22,7 @@ def select_data(dataframe: pd.DataFrame, etnia: str) -> pd.DataFrame:
 	:rtype: pd.DataFrame
 
 	Exemplo:
-	
+
 	>>> df = pd.DataFrame({"RJ": [1, 2, 3]})
 	>>> select_data(df, "caju")
 	'etnia invalida'
@@ -67,4 +67,4 @@ def select_data(dataframe: pd.DataFrame, etnia: str) -> pd.DataFrame:
 	return docentes_raca_estado
 
 if __name__ == "__main__":
-	doctest.testmod(verbose=True)
+    doctest.testmod()

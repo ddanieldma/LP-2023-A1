@@ -48,15 +48,15 @@
 <dd class="field-odd"><p>geopandas.GeoDataFrame</p>
 </dd>
 </dl>
-<p>Exemplo:
-&gt;&gt;&gt; gdf = criar_geometria_brasil(“dados.gpkg”, “Estado”)
-&gt;&gt;&gt; gdf.head()</p>
-<blockquote>
-<div><p>Estado    Geometria</p>
-</div></blockquote>
-<p>0  MG        10.91231, -98,31233
-1  RJ        98.19123, 45,12930
-2  SP        56.19234, -90.49384</p>
+<p>Exemplo:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gdf</span> <span class="o">=</span> <span class="n">criar_geometria_brasil</span><span class="p">(</span><span class="s2">&quot;dados.gpkg&quot;</span><span class="p">,</span> <span class="s2">&quot;Estado&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gdf</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="go">   Estado    Geometria</span>
+<span class="go">0  MG        10.91231, -98,31233</span>
+<span class="go">1  RJ        98.19123, 45,12930</span>
+<span class="go">2  SP        56.19234, -90.49384</span>
+</pre></div>
+</div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gdf</span> <span class="o">=</span> <span class="n">criar_geometria_brasil</span><span class="p">(</span><span class="s2">&quot;dados.gpkg&quot;</span><span class="p">,</span> <span class="s2">&quot;Estado&quot;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="w">    </span><span class="o">...</span>
@@ -80,15 +80,15 @@
 <dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
 </dl>
-<p>Exemplo:
-&gt;&gt;&gt; df = ler_csv(“dados.csv”)
-&gt;&gt;&gt; df.head()</p>
-<blockquote>
-<div><p>Estado    DDD</p>
-</div></blockquote>
-<p>0  MG        32
-1  RJ        21
-2  SP        11</p>
+<p>Exemplo:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">ler_csv</span><span class="p">(</span><span class="s2">&quot;dados.csv&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="go">   Estado    DDD</span>
+<span class="go">0  MG        32</span>
+<span class="go">1  RJ        21</span>
+<span class="go">2  SP        11</span>
+</pre></div>
+</div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ler_csv</span><span class="p">(</span><span class="s1">&#39;arquivo_fake.csv&#39;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="w">    </span><span class="o">...</span>

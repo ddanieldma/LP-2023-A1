@@ -173,7 +173,7 @@ def type_of_university(dataframe: pd.DataFrame, column: str = "TP_CATEGORIA_ADMI
 
     :return: Dataframe com uma coluna adicionada, informando se a escola é pública ou privada
     :rtype: pd.DataFrame
-    
+
     Exemplo:
 
     >>> dados = {"Universidade": ["UFRJ", "FGV", "PUC"], "TP_CATEGORIA_ADMINISTRATIVA": [1, 5, 6]}

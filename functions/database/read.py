@@ -12,6 +12,7 @@ def ler_csv(caminho_csv) -> DataFrame:
     :rtype: pandas.DataFrame
 
     Exemplo:
+
     >>> df = ler_csv("dados.csv")
     >>> df.head()
        Estado    DDD
@@ -42,6 +43,7 @@ def criar_geometria_brasil(caminho_arq, layer_arq) -> GeoDataFrame:
     :rtype: geopandas.GeoDataFrame
 
     Exemplo:
+    
     >>> gdf = criar_geometria_brasil("dados.gpkg", "Estado")
     >>> gdf.head()
        Estado    Geometria
