@@ -31,11 +31,7 @@ def ler_csv(caminho_csv) -> DataFrame:
     except ValueError:
         print("O caminho deve ser uma string")
     else:
-        return df    
-    
-
-base_inep = ler_csv("ed-superior-inep.csv")
-
+        return df       
 
 def criar_geometria_brasil(caminho_arq, layer_arq) -> GeoDataFrame:
     """Recebe um arquivo e retona um geodataframe
