@@ -2,7 +2,7 @@
 '''
 
 import sys
-sys.path.append("../mini_main")
+sys.path.append("functions/database")
 import geopandas as gpd
 import matplotlib.pyplot as plt
 from tratamento_base import tratar_base

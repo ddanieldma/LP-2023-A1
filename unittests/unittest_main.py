@@ -4,7 +4,7 @@
 import unittest
 import geopandas as gpd
 import pandas as pd
-from read import *
+from functions.database.read import *
 
 class TesteFunçõesMain(unittest.TestCase):
 

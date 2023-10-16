@@ -1,4 +1,6 @@
-from utils_kauan import *
+from functions.database.analyzing_functions import *
+from functions.database.cleaning_functions import *
+from functions.plotting.plotting import *
 import unittest
 import pandas as pd
 import matplotlib.pyplot as plt

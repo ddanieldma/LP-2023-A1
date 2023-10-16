@@ -2,8 +2,8 @@ import sys
 sys.path.append("..\LP-2023-A1")
 import pandas as pd
 import numpy as np
-from functions.analyzing.analyzing_functions import *
-from functions.cleaning.cleaning_functions import *
+from functions.database.analyzing_functions import *
+from functions.database.cleaning_functions import *
 from functions.plotting.plotting import *
 # from clean_functions.read import ler_csv
 import matplotlib.pyplot as plt

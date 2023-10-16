@@ -2,7 +2,7 @@
 '''
 
 import sys
-sys.path.append("../clean_functions")
+sys.path.append("functions/database")
 import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
@@ -97,7 +97,7 @@ def tratar_base() -> GeoDataFrame:
     '''  
 
     try:
-        df_guilherme = ler_csv("../bases_de_dados/ed-superior-inep.csv")
+        df_guilherme = ler_csv("../../bases_de_dados/ed-superior-inep.csv")
     except ValueError:
         print("O caminho deve ser uma string (ler_csv)")
         sys.exit(1)
