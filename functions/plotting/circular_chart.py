@@ -2,7 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from functions.database.utils import *
+import os
+import sys
+project_root = os.path.dirname(os.path.dirname(__file__)) 
+sys.path.append(project_root)
+
+from database.utils import *
 
 # definindo multiplos plots circulares
 fig, (ax1, ax2) = plt.subplots(1, 2, subplot_kw=dict(projection="polar"))
@@ -64,7 +69,7 @@ def make_plot(dataframe: pd.DataFrame, title: str, etnia: int, axes) -> None:
 		IDXS += list(range(offset + PADDING, offset + tamanho + PADDING))
 		offset += tamanho + PADDING
 
-	axes.set_title(title, verticalalignment="bottom", fontsize=10)
+	axes.set_title(title, verticalalignment="bottom", fontsize=10, pad=10)
 
 	axes.set_theta_offset(OFFSET)
 
@@ -77,7 +82,7 @@ def make_plot(dataframe: pd.DataFrame, title: str, etnia: int, axes) -> None:
 	axes.set_xticks([])
 	axes.set_rlabel_position(-347)
 	axes.set_yticks([20, 40, 60, 80, 100])
-	axes.set_yticklabels(["20%", "40%", "60%", "80%", "100%"], fontsize=5)
+	axes.set_yticklabels(["20%", "40%", "60%", "80%", "100%"], fontsize=7)
 
 	COLORS = [f"C{i}" for i, tamanho in enumerate(GROUPS_SIZE) for _ in range(tamanho)]
 
@@ -93,10 +98,10 @@ def make_plot(dataframe: pd.DataFrame, title: str, etnia: int, axes) -> None:
 		x1 = np.linspace(ANGLES[offset + PADDING], ANGLES[offset + tamanho + PADDING - 1])
 		axes.plot(x1, [-5] * 50, color="#333333")
 
-		axes.text(
-			np.mean(x1), -20, grupo, color="#333333", fontsize=8,
-			fontweight="bold", ha="center", va="top"
-		)
+		# axes.text(
+		# 	np.mean(x1), -20, grupo, color="#333333", fontsize=8,
+		# 	fontweight="bold", ha="center", va="top"
+		# )
 
 		# adicionando marcações de 20%, 40%, 60%, 80% e 100%
 		x2 = np.linspace(ANGLES[offset], ANGLES[offset + tamanho + PADDING - 1], num=50)

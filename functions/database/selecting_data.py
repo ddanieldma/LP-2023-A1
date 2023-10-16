@@ -1,7 +1,15 @@
+'''Módulo que seleciona os dados na base
+'''
+
 import numpy as np
 import pandas as pd
 
-from functions.database.utils import *
+import os
+import sys
+project_root = os.path.dirname(os.path.dirname(__file__)) 
+sys.path.append(project_root)
+
+from database.utils import *
 
 def select_data(dataframe: pd.DataFrame, etnia: str) -> pd.DataFrame:
 	"""Seleciona na base os dados relatvios à etnia escolhida

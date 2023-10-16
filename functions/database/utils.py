@@ -58,7 +58,7 @@ def get_label_rotation(angle: int, offset: int) -> (int, str):
 	'right'
 
 	>>> get_label_rotation("123", "123")
-	'Tipo incorreto'
+	'tipo incorreto'
 	"""
 
 	try:
