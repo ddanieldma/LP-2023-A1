@@ -2,6 +2,7 @@
 '''
 
 import sys
+sys.path.append("../clean_functions")
 import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
@@ -96,7 +97,7 @@ def tratar_base() -> GeoDataFrame:
     '''  
 
     try:
-        df_guilherme = ler_csv("ed-superior-inep.csv")
+        df_guilherme = ler_csv("../bases_de_dados/ed-superior-inep.csv")
     except ValueError:
         print("O caminho deve ser uma string (ler_csv)")
         sys.exit(1)
@@ -112,7 +113,7 @@ def tratar_base() -> GeoDataFrame:
     #Filtragem para se obter a soma de docentes por estado (sigla)
     df_para_plot = agrupamento_de_dados(df_gui_copia, "sigla", "QT_DOC_EXE")
     
-    geometria_brasil = criar_geometria_brasil("bcim_2016_21_11_2018.gpkg", "lim_unidade_federacao_a")
+    geometria_brasil = criar_geometria_brasil("../bases_de_dados/bcim_2016_21_11_2018.gpkg", "lim_unidade_federacao_a")
 
     #Unir as bases da dados com base na columa "sigla"
     dataframe_plot = merge_bases(geometria_brasil, df_para_plot, "sigla")
