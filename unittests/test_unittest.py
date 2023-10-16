@@ -1,3 +1,8 @@
+import sys
+import os
+project_root = os.path.dirname(os.path.dirname(__file__)) 
+sys.path.append(project_root)
+
 from functions.database.analyzing_functions import *
 from functions.database.cleaning_functions import *
 from functions.plotting.plotting import *
