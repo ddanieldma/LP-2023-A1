@@ -5,6 +5,9 @@ import numpy as np
 from functions.database.analyzing_functions import *
 from functions.database.cleaning_functions import *
 from functions.plotting.plotting import *
+from functions.database.tratamento_base import *
+from functions.plotting.plot_guilherme import *
+from functions.database.read import *
 # from clean_functions.read import ler_csv
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
@@ -12,6 +15,8 @@ import matplotlib.ticker as mtick
 
 # Lendo csv
 df_ens_sup = ler_csv("bases_de_dados/ed-superior-inep.csv")
+
+geometria_brasil = criar_geometria_brasil("bases_de_dados/bcim_2016_21_11_2018.gpkg", "lim_unidade_federacao_a")
 
 
 # Dropando as colunas com drop
@@ -53,3 +58,8 @@ formata_cada_plot(df_dout, "Professores com doutorado por UF", 2, axes)
 # Exiba o grid plot
 plt.tight_layout()
 plt.savefig("graficos/percentuais_de_docentes.png")
+
+datagui = tratar_base(df_ens_sup, geometria_brasil)
+plotar_gráfico(datagui)
+plt.savefig("graficos/plot_mapa.png")
+plt.show()

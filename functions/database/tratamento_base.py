@@ -7,8 +7,7 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 from pandas import DataFrame
 from geopandas import GeoDataFrame
-from read import ler_csv
-from read import criar_geometria_brasil
+from functions.database.read import *
 
 def renomear_coluna(df, nome_antigo, nome_novo) -> DataFrame:
     """Renomeia a coluna desejada.
@@ -89,30 +88,19 @@ def merge_bases(df1, df2, coluna) -> GeoDataFrame:
     else:
         return dataframe_plot
 
-def tratar_base() -> GeoDataFrame:
+def tratar_base(dataframe, geom_br) -> GeoDataFrame:
     '''Une as funções de tratamento de base para retornar o dataframe final
     '''  
 
-    try:
-        df_guilherme = ler_csv("../../bases_de_dados/ed-superior-inep.csv")
-    except ValueError:
-        print("O caminho deve ser uma string (ler_csv)")
-        sys.exit(1)
-    except FileNotFoundError:
-        print("arquivo não encontrado (ler_csv)")
-        sys.exit(1)
-
-    df_gui_copia = df_guilherme.copy()
+    df_gui_copia = dataframe.copy()
 
     #Renomear para igualar o nome da colunas nas bases
     renomear_coluna(df_gui_copia, "SG_UF_IES", "sigla")
 
     #Filtragem para se obter a soma de docentes por estado (sigla)
     df_para_plot = agrupamento_de_dados(df_gui_copia, "sigla", "QT_DOC_EXE")
-    
-    geometria_brasil = criar_geometria_brasil("../../bases_de_dados/bcim_2016_21_11_2018.gpkg", "lim_unidade_federacao_a")
 
     #Unir as bases da dados com base na columa "sigla"
-    dataframe_plot = merge_bases(geometria_brasil, df_para_plot, "sigla")
+    dataframe_plot = merge_bases(geom_br, df_para_plot, "sigla")
     
     return dataframe_plot

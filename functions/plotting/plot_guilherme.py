@@ -6,7 +6,7 @@ import sys
 sys.path.append("../database")
 import geopandas as gpd
 import matplotlib.pyplot as plt
-from tratamento_base import tratar_base
+from functions.database.tratamento_base import *
 
 def customização_plot() -> None:
     """Função para adicionar as customizações a serem aplicadas no plot
@@ -20,19 +20,17 @@ def customização_plot() -> None:
     # Adicionar cor de fundo
     plt.gca().set_facecolor('lightblue')
 
-def plotar_gráfico() -> None:
+def plotar_gráfico(dataframe) -> None:
     """Função que plota o gráfico
     """
-    dataframe_plot = tratar_base()
-
     try:
-        ax = dataframe_plot.plot(column="QT_DOC_EXE", cmap="viridis", legend=True)
+        ax = dataframe.plot(column="QT_DOC_EXE", cmap="viridis", legend=True)
     except (ValueError, KeyError):
         print("coluna e/ou cmap não existem (criação do plot)")
         sys.exit(1)
         
     # Adicionando número (escrito) de docentes nos estados (rótulo)
-    for x, y, label in zip(dataframe_plot.geometry.centroid.x, dataframe_plot.geometry.centroid.y, dataframe_plot["QT_DOC_EXE"]):
+    for x, y, label in zip(dataframe.geometry.centroid.x, dataframe.geometry.centroid.y, dataframe["QT_DOC_EXE"]):
         # Pequeno tratamento das cores (branco fica pouco legível no amarelo)
         if label == 72466:
             color = "black"
@@ -46,9 +44,6 @@ def plotar_gráfico() -> None:
 
     customização_plot()
 
-    plt.savefig("../graficos/plot_mapa.png")
-
     plt.show()  # Mostrar o gráfico uma única vez
 
-plotar_gráfico()
 
