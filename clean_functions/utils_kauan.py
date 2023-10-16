@@ -13,12 +13,12 @@ def ler_csv(caminho_csv) -> pd.DataFrame:
     :rtype: pandas.DataFrame
 
     Exemplo:
-    >>> df = ler_csv("../bases_de_dados/dados_teste.csv")
+    >>> df = ler_csv("bases_de_dados/dados_teste.csv")
     >>> df.head()
-       Estado    DDD
-    0  MG        32
-    1  RJ        21
-    2  SP        11
+      Estado  DDD
+    0     MG   32
+    1     RJ   21
+    2     SP   11
 
     >>> ler_csv('arquivo_fake.csv')
     'Arquivo não encontrado'
@@ -32,7 +32,6 @@ def ler_csv(caminho_csv) -> pd.DataFrame:
     else:
         return df    
 
-print(ler_csv("../bases_de_dados/dados_teste.csv"))
 
 
 def removing_list_columns(dataframe: pd.DataFrame, lista: list) -> pd.DataFrame:
@@ -266,5 +265,5 @@ def cria_base_ordem_crescente(dataframe : pd.DataFrame, index_to_unstack: str ,c
         # Retornando o Dataframe
         return dataframe
     
-# if __name__ == "__main__":
-#     doctest.testmod()
+if __name__ == "__main__":
+    doctest.testmod()
