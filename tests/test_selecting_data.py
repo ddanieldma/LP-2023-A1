@@ -3,7 +3,7 @@ import os
 project_root = os.path.dirname(os.path.dirname(__file__)) 
 sys.path.append(project_root)
 
-from selecting_data import *
+from functions.database.selecting_data import *
 
 import unittest
 
