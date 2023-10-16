@@ -4,6 +4,17 @@ import matplotlib
 import doctest
 
 def check_ethnicity(etnia: str) -> bool:
+	"""Verifica se a etnia é válida e, portanto, existe no dataset
+
+	:param str etnia: etnia a ser verificada
+
+	:returns: True se a etnia for válida e False se não for
+	
+	:rtype: bool
+	"""
+
+	try
+
 	etnias_validas = [
 		"branca",
 		"negra",
