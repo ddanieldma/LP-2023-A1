@@ -7,7 +7,8 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 from pandas import DataFrame
 from geopandas import GeoDataFrame
-from functions.database.read import *
+from read import *
+from utils import *
 
 def renomear_coluna(df, nome_antigo, nome_novo) -> DataFrame:
     """Renomeia a coluna desejada.
@@ -20,7 +21,7 @@ def renomear_coluna(df, nome_antigo, nome_novo) -> DataFrame:
     :rtype: pandas.DataFrame
     
     Exemplo:
-    
+
     >>> dados = {'RJ': [1, 2, 3], 'SP': [4, 5, 6]}
     >>> df = pd.DataFrame(data)
     >>> df = renomear_coluna(df, 'SP', 'MG')
@@ -71,12 +72,12 @@ def merge_bases(df1, df2, coluna) -> GeoDataFrame:
     :rtype: geopandas.GeoDataFrame
 
     Exemplo:
-
-    >>> dados1 = {'ID': [1, 2, 3], 'Estados: ['MG', 'RJ', 'SP']}
+    
+    >>> dados1 = {'ID': [1, 2, 3], 'Estados': ['MG', 'RJ', 'SP']}
     >>> dados2 = {'ID': [1, 2, 3], 'Área': [50000, 10000, 70000]}
     >>> df1 = pd.DataFrame(dados1)
     >>> df2 = pd.DataFrame(dados2)
-    >>> resultado = merge_bases(dados1, dados2, 'ID')
+    >>> resultado = merge_bases(df1, df2, 'ID')
     >>> resultado
        ID   Estados  Área
     0   1        MG  50000
@@ -107,3 +108,8 @@ def tratar_base(dataframe, geom_br) -> GeoDataFrame:
     dataframe_plot = merge_bases(geom_br, df_para_plot, "sigla")
     
     return dataframe_plot
+
+if __name__ == "__main__":
+    doctest.testfile("../doctests.txt", verbose=True)
+
+    

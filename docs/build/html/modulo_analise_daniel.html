@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Funções Análise Daniel &#8212; A1 Linguagens de Programação 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Funções Análise Guilherme" href="modulo_analise_guilherme.html" />
+    <link rel="prev" title="Funções Análise Geral" href="modulo_analise_geral.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="funcoes-analise-daniel">
+<h1>Funções Análise Daniel<a class="headerlink" href="#funcoes-analise-daniel" title="Link to this heading">¶</a></h1>
+<dl class="py function" id="module-database.utils">
+<dt class="sig sig-object py" id="database.utils.add_labels">
+<span class="sig-prename descclassname"><span class="pre">database.utils.</span></span><span class="sig-name descname"><span class="pre">add_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#database.utils.add_labels" title="Link to this definition">¶</a></dt>
+<dd><p>Função auxiliar que adiciona os labels no plot circular</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>angles</strong> (<em>list</em>) – lista de ângulos</p></li>
+<li><p><strong>values</strong> (<em>list</em>) – lista de alturas dos labels</p></li>
+<li><p><strong>labels</strong> (<em>list</em>) – lista de textos dos labels</p></li>
+<li><p><strong>offset</strong> (<em>int</em>) – onde começam os labels a ser colocados</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib.projections.polar.PolarAxesSubplot</em>) – objeto que contém o plot circular</p></li>
+</ul>
+</dd>
+</dl>
+<p>Exemplo:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">add_labels</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="go">&#39;Algum parâmetro tem o tipo incorreto&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;coisa&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add_labels</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+<span class="go">&#39;Algum array está vazio&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="database.utils.check_ethnicity">
+<span class="sig-prename descclassname"><span class="pre">database.utils.</span></span><span class="sig-name descname"><span class="pre">check_ethnicity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">etnia</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#database.utils.check_ethnicity" title="Link to this definition">¶</a></dt>
+<dd><p>Verifica se a etnia é válida e, portanto, existe no dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>etnia</strong> (<em>str</em>) – etnia a ser verificada</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True se a etnia for válida e False se não for</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p>Exemplo:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_ethnicity</span><span class="p">(</span><span class="s2">&quot;amarela&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_ethnicity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">&#39;tipo incorreto&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="database.utils.get_label_rotation">
+<span class="sig-prename descclassname"><span class="pre">database.utils.</span></span><span class="sig-name descname"><span class="pre">get_label_rotation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset:</span> <span class="pre">int)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'int'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'str'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#database.utils.get_label_rotation" title="Link to this definition">¶</a></dt>
+<dd><p>Calcula a rotação do label da barra no plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>angle</strong> (<em>int</em>) – angulo em radianos</p></li>
+<li><p><strong>offset</strong> (<em>int</em>) – offset em radianos</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>valores para rotação e alinhamento da label em uma tupla</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+<p>Exemplo:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rotacao</span><span class="p">,</span> <span class="n">alinhamento</span> <span class="o">=</span> <span class="n">get_label_rotation</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rotacao</span>
+<span class="go">450.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alinhamento</span>
+<span class="go">&#39;right&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_label_rotation</span><span class="p">(</span><span class="s2">&quot;123&quot;</span><span class="p">,</span> <span class="s2">&quot;123&quot;</span><span class="p">)</span>
+<span class="go">&#39;tipo incorreto&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">A1 Linguagens de Programação</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="modulo_analise_geral.html">Funções Análise Geral</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Funções Análise Daniel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#database.utils.add_labels"><code class="docutils literal notranslate"><span class="pre">add_labels()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database.utils.check_ethnicity"><code class="docutils literal notranslate"><span class="pre">check_ethnicity()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database.utils.get_label_rotation"><code class="docutils literal notranslate"><span class="pre">get_label_rotation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_analise_guilherme.html">Funções Análise Guilherme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_analise_kauan.html">Funções Análise Kauan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_cleaning_kauan.html">Funções Limpeza da base Kauan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_cleaning_guilherme.html">Funções Limpeza da base Kauan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_graficos_kauan.html">Funções Cria Gráfico Kauan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_graficos_daniel.html">Funções Cria Gráfico Daniel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_graficos_guilherme.html">Funções Cria Gráfico Guilherme</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="modulo_analise_geral.html" title="previous chapter">Funções Análise Geral</a></li>
+      <li>Next: <a href="modulo_analise_guilherme.html" title="next chapter">Funções Análise Guilherme</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Daniel, Guilherme e Kauan.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/modulo_analise_daniel.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -13,7 +13,7 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Funções Cria Gráfico Kauan" href="modulo_graficos_kauan.html" />
+    <link rel="next" title="Funções Limpeza da base Kauan" href="modulo_cleaning_guilherme.html" />
     <link rel="prev" title="Funções Análise Kauan" href="modulo_analise_kauan.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -70,15 +70,15 @@
 <dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
 </dl>
-<p>Exemplo:
-&gt;&gt;&gt; df = ler_csv(“bases_de_dados/dados_teste.csv”)
-&gt;&gt;&gt; df.head()</p>
-<blockquote>
-<div><p>Estado  DDD</p>
-</div></blockquote>
-<p>0     MG   32
-1     RJ   21
-2     SP   11</p>
+<p>Exemplo:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">ler_csv</span><span class="p">(</span><span class="s2">&quot;bases_de_dados/dados_teste.csv&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="go">  Estado  DDD</span>
+<span class="go">0     MG   32</span>
+<span class="go">1     RJ   21</span>
+<span class="go">2     SP   11</span>
+</pre></div>
+</div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ler_csv</span><span class="p">(</span><span class="s1">&#39;arquivo_fake.csv&#39;</span><span class="p">)</span>
 <span class="go">&#39;Arquivo não encontrado&#39;</span>
 </pre></div>
@@ -118,7 +118,9 @@
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SP&quot;</span><span class="p">,</span> <span class="s2">&quot;RS&quot;</span><span class="p">,</span> <span class="s2">&quot;SC&quot;</span><span class="p">,</span> <span class="s2">&quot;RJ&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">removing_columns_from_to</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="s2">&quot;SP&quot;</span><span class="p">,</span> <span class="s2">&quot;RS&quot;</span><span class="p">)</span>
 <span class="go">&quot;Houve um erro. Por favor, tente novamente:&#39;list&#39; object has no attribute &#39;columns&#39;&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>
 </pre></div>
 </div>
 </dd></dl>
@@ -141,17 +143,17 @@
 <dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
-<p>Exemplo:
-&gt;&gt;&gt; dados = {“RJ”: [1, 2, 3], “SP”: [4, 5, 6]}
-&gt;&gt;&gt; df = pd.DataFrame(dados)
-&gt;&gt;&gt; df = removing_list_columns(df, [“SP”])
-&gt;&gt;&gt; df</p>
-<blockquote>
-<div><p>RJ</p>
-</div></blockquote>
-<p>0   1
-1   2
-2   3</p>
+<p>Exemplo:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dados</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;RJ&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;SP&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dados</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">removing_list_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;SP&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">   RJ</span>
+<span class="go">0   1</span>
+<span class="go">1   2</span>
+<span class="go">2   3</span>
+</pre></div>
+</div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">removing_list_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;DF&quot;</span><span class="p">,</span> <span class="s2">&quot;RS&quot;</span><span class="p">,</span> <span class="s2">&quot;SC&quot;</span><span class="p">])</span>
 <span class="go">&#39;O nome da coluna não está no dataframe&#39;</span>
 </pre></div>
@@ -181,17 +183,17 @@
 <dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
-<p>Exemplo:
-&gt;&gt;&gt; dados = {“Universidade”: [“UFRJ”, “FGV”, “PUC”], “TP_CATEGORIA_ADMINISTRATIVA”: [1, 5, 6]}
-&gt;&gt;&gt; df = pd.DataFrame(dados)
-&gt;&gt;&gt; df = type_of_university(df)
-&gt;&gt;&gt; df</p>
-<blockquote>
-<div><p>Universidade  TP_CATEGORIA_ADMINISTRATIVA Tipo de Universidade</p>
-</div></blockquote>
-<p>0         UFRJ                            1              Pública
-1          FGV                            5              Privada
-2          PUC                            6              Privada</p>
+<p>Exemplo:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dados</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Universidade&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;UFRJ&quot;</span><span class="p">,</span> <span class="s2">&quot;FGV&quot;</span><span class="p">,</span> <span class="s2">&quot;PUC&quot;</span><span class="p">],</span> <span class="s2">&quot;TP_CATEGORIA_ADMINISTRATIVA&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dados</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">type_of_university</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">  Universidade  TP_CATEGORIA_ADMINISTRATIVA Tipo de Universidade</span>
+<span class="go">0         UFRJ                            1              Pública</span>
+<span class="go">1          FGV                            5              Privada</span>
+<span class="go">2          PUC                            6              Privada</span>
+</pre></div>
+</div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">type_of_university</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;TP&quot;</span><span class="p">)</span>
 <span class="go">&#39;O nome da coluna não existe ou não é uma string&#39;</span>
 </pre></div>
@@ -219,6 +221,9 @@
 <h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="modulo_analise_geral.html">Funções Análise Geral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_analise_daniel.html">Funções Análise Daniel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_analise_guilherme.html">Funções Análise Guilherme</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modulo_analise_kauan.html">Funções Análise Kauan</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Funções Limpeza da base Kauan</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#database.cleaning_functions.criar_geometria_brasil"><code class="docutils literal notranslate"><span class="pre">criar_geometria_brasil()</span></code></a></li>
@@ -228,7 +233,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#database.cleaning_functions.type_of_university"><code class="docutils literal notranslate"><span class="pre">type_of_university()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_cleaning_guilherme.html">Funções Limpeza da base Kauan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modulo_graficos_kauan.html">Funções Cria Gráfico Kauan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_graficos_daniel.html">Funções Cria Gráfico Daniel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulo_graficos_guilherme.html">Funções Cria Gráfico Guilherme</a></li>
 </ul>
 
 <div class="relations">
@@ -236,7 +244,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="modulo_analise_kauan.html" title="previous chapter">Funções Análise Kauan</a></li>
-      <li>Next: <a href="modulo_graficos_kauan.html" title="next chapter">Funções Cria Gráfico Kauan</a></li>
+      <li>Next: <a href="modulo_cleaning_guilherme.html" title="next chapter">Funções Limpeza da base Kauan</a></li>
   </ul></li>
 </ul>
 </div>

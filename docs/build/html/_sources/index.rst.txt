@@ -10,9 +10,15 @@ Welcome to A1 Linguagens de Programação's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   modulo_analise_geral
+   modulo_analise_daniel
+   modulo_analise_guilherme
    modulo_analise_kauan
    modulo_cleaning_kauan
+   modulo_cleaning_guilherme
    modulo_graficos_kauan
+   modulo_graficos_daniel
+   modulo_graficos_guilherme
 
 
 Indices and tables
