@@ -6,7 +6,6 @@ import sys
 sys.path.append("../database")
 import geopandas as gpd
 import matplotlib.pyplot as plt
-from functions.database.tratamento_base import *
 
 def customização_plot() -> None:
     """Função para adicionar as customizações a serem aplicadas no plot

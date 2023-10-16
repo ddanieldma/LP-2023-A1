@@ -53,4 +53,4 @@ def formata_cada_plot(dataframe: pd.DataFrame, title: str, numberplot: int, axis
         return "O número do plot não existe"
 
 if __name__ == "__main__":
-    doctest.testmod()
+    doctest.testfile("../doctests_plotting.txt", )
