@@ -45,7 +45,7 @@ def formata_cada_plot(dataframe: pd.DataFrame, title: str, numberplot: int, axis
 
         # Colocando os nomes nos eixos
         axis[numberplot].set_xlabel("Unidade Federativa")
-        axis[numberplot].set_ylabel("Porcentagem")
+        axis[numberplot].set_ylabel("Porcentagem em relação ao total de docentes")
 
     except ValueError:
         return "O título não é uma string"

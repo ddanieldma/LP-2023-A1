@@ -1,6 +1,7 @@
 '''Módulo que pega a base tratada e plota a visualização desejada
 '''
 
+
 import sys
 sys.path.append("../database")
 import geopandas as gpd
@@ -45,7 +46,7 @@ def plotar_gráfico() -> None:
 
     customização_plot()
 
-    plt.savefig("../../graficos/plot_mapa.png")
+    plt.savefig("../graficos/plot_mapa.png")
 
     plt.show()  # Mostrar o gráfico uma única vez
 

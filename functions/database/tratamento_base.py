@@ -59,7 +59,6 @@ def agrupamento_de_dados(df, coluna_base, coluna_valores) -> DataFrame:
     else:
         return df_para_plot
 
-
 def merge_bases(df1, df2, coluna) -> GeoDataFrame:
     """Realiza o merge de duas bases com base na coluna especificada.
 
@@ -89,7 +88,6 @@ def merge_bases(df1, df2, coluna) -> GeoDataFrame:
         return "A coluna especificada não existe"
     else:
         return dataframe_plot
-
 
 def tratar_base() -> GeoDataFrame:
     '''Une as funções de tratamento de base para retornar o dataframe final

@@ -45,8 +45,6 @@ def cria_porcentagem(dataframe: pd.DataFrame, nome_col: str, num_doc_esp: str, t
     return dataframe
 
 
-
-
 def cria_base_ordem_crescente(dataframe : pd.DataFrame, index_to_unstack: str ,col_porcentagem: str):
     """ Função que ordena os dados em ordem crescente, por UF, da menor soma de porcentagem até a maior
 

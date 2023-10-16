@@ -6,7 +6,6 @@ import doctest
 from geopandas import GeoDataFrame
 import geopandas as gpd
 
-
 def ler_csv(caminho_csv) -> pd.DataFrame: 
     """Recebe um arquivo csv e retona um dataframe
 
@@ -56,9 +55,6 @@ def criar_geometria_brasil(caminho_arq, layer_arq) -> GeoDataFrame:
         return "Arquivo não encontrado ou input != string"
     else:
         return geometria_brasil
-
-
-
 
 def removing_list_columns(dataframe: pd.DataFrame, lista: list) -> pd.DataFrame:
     """Essa função serve para remover uma lista de colunas de um dataframe
@@ -163,8 +159,6 @@ def removing_columns_from_to(dataframe: pd.DataFrame, start_col: str, end_col: s
     else:
         return dataframe
 
-
-# Dizendo se é pública ou privada
 def type_of_university(dataframe: pd.DataFrame, column: str = "TP_CATEGORIA_ADMINISTRATIVA", nome_coluna_nova: str = "Tipo de Universidade") -> pd.DataFrame:
     """ Define o tipo de universidade entre pública e privada com base num dicionário feito pelo MEC, que vai de 1 à 9, sendo de 1 a 3 para escolas públicas e de 4 até 9 para escolas privadas
 
