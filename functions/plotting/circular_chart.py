@@ -22,6 +22,7 @@ def make_plot(dataframe: pd.DataFrame, title: str, etnia: int, axes) -> None:
 	:param matplotlib.projections.polar.PolarAxes axes
 
 	Exemplo:
+	
 	>>> df = pd.DataFrame({"RJ": [1, 2, 3]})
 	>>> fig, ax = plt.subplots(2)
 	>>> make_plot(df, "titulo", "caju", ax)

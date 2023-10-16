@@ -54,6 +54,7 @@ def cria_base_ordem_crescente(dataframe : pd.DataFrame, index_to_unstack: str ,c
 
     :return: O dataframe com os estados em ordem crescente da coluna que você especificou
     :rtype: pd.DataFrame
+    
     >>> dados = {'PCT_DOUT_TOTAL': {('AC', 'Privada'): 5.219985085756898, ('AC', 'Pública'): 38.92617449664429, ('AL', 'Privada'): 10.928853754940711, ('AL', 'Pública'): 32.055335968379445, ('AM', 'Privada'): 7.8463800073502386}}
     >>> df = pd.DataFrame(dados)
     >>> df = df.rename_axis(["SG_UF_IES", "Tipo de Universidade"])
