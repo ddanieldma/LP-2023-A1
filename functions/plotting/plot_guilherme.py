@@ -2,7 +2,7 @@
 '''
 
 import sys
-sys.path.append("functions/database")
+sys.path.append("../database")
 import geopandas as gpd
 import matplotlib.pyplot as plt
 from tratamento_base import tratar_base
@@ -45,7 +45,7 @@ def plotar_gráfico() -> None:
 
     customização_plot()
 
-    plt.savefig("../graficos/plot_mapa.png")
+    plt.savefig("../../graficos/plot_mapa.png")
 
     plt.show()  # Mostrar o gráfico uma única vez
 
