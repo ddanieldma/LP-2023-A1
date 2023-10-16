@@ -3,6 +3,19 @@ import matplotlib.pyplot as plt
 import matplotlib
 import doctest
 
+def check_ethnicity(etnia: str) -> bool:
+	etnias_validas = [
+		"branca",
+		"negra",
+		"indigena",
+		"amarela"
+	]
+
+	if etnia in etnias_validas:
+		return True
+	else:
+		return False
+
 # Função auxiliar para rotação e alinhamento dos labels.
 def get_label_rotation(angle: int, offset: int) -> (int, str):
 	"""Calcula a rotação do label da barra no plot

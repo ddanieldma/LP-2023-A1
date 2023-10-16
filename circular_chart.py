@@ -1,108 +1,85 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
-from dados_chart_brancos import *
-from dados_chart_negros import *
+# from dados_chart_brancos import *
+# from dados_chart_negros import *
 
-from auxiliary import add_labels
+from utils import add_labels
 
 # definindo multiplos plots circulares
 fig, (ax1, ax2) = plt.subplots(1, 2, subplot_kw=dict(projection="polar"))
 
-#==================================================================
-# Primeiro plot, para docentes brancos
-ax1.set_title("Porcentagem de docentes brancos", verticalalignment="bottom")
-
-print(type(ax1))
-
-ax1.set_theta_offset(OFFSET_brancos)
-
-# define limites para altura da barra, de forma que aja um buraco no meio
-ax1.set_ylim(-100, 100)
-
-ax1.set_frame_on(False)
-ax1.xaxis.grid(False)
-ax1.yaxis.grid(False)
-ax1.set_xticks([])
-ax1.set_rlabel_position(-355)
-ax1.set_yticks([20, 40, 60, 80, 100])
-ax1.set_yticklabels(["20%", "40%", "60%", "80%", "100%"], fontsize=9)
-
-GROUPS_SIZE = [len(regiao[1]) for regiao in professores_brancos_raca_estado.groupby("NO_REGIAO_IES")]
-COLORS = [f"C{i}" for i, tamanho in enumerate(GROUPS_SIZE) for _ in range(tamanho)]
-
-ax1.bar(
-	ANGLES_brancos[IDXS], VALUES_brancos, width=WIDTH_brancos, linewidth=2,
-	color=COLORS, edgecolor="#ffffff"
-)
-
-add_labels(ANGLES_brancos[IDXS], VALUES_brancos, LABELS_brancos, OFFSET_brancos, ax1)
-
-offset = 0
-for grupo, tamanho in zip(["Centro-Oeste", "Nordeste", "Norte", "Sudeste", "Sul"], GROUPS_SIZE):
-	x1 = np.linspace(ANGLES_brancos[offset + PAD_brancos], ANGLES_brancos[offset + tamanho + PAD_brancos - 1])
-	ax1.plot(x1, [-5] * 50, color="#333333")
-
-	ax1.text(
-		np.mean(x1), -20, grupo, color="#333333", fontsize=8,
-		fontweight="bold", ha="center", va="top"
+def make_plot(dataframe: pd.DataFrame, title: str, etnia: int, axes: np.ndarray) -> None:
+	etnia = etnia.upper()
+	
+	dataframe_sorted = (
+		dataframe
+		.groupby(["NO_REGIAO_IES"])
+		.apply(lambda x: x.sort_values([etnia + "_RELACAO"], ascending=False))
+		.reset_index(drop=True)
 	)
 
-	# adicionando marcações de 20%, 40%, 60%, 80% e 100%
-	x2 = np.linspace(ANGLES_brancos[offset], ANGLES_brancos[offset + tamanho + PAD_brancos - 1], num=50)
-	ax1.plot(x2, [20] * 50, color="#bebebe", lw=0.8)
-	ax1.plot(x2, [40] * 50, color="#bebebe", lw=0.8)
-	ax1.plot(x2, [60] * 50, color="#bebebe", lw=0.8)
-	ax1.plot(x2, [80] * 50, color="#bebebe", lw=0.8)
-	ax1.plot(x2, [100] * 50, color="#bebebe", lw=0.8)
+	PADDING = 2
+	OFFSET = np.pi / 2
 
-	offset += tamanho + PAD_brancos
+	GROUP = dataframe_sorted["NO_REGIAO_IES"].values
 
-#==================================================================
-# Segundo plot, para docentes brancos
-ax2.set_title("Porcentagem de docentes negros")
+	VALUES = dataframe_sorted[etnia + "_RELACAO"].values
+	LABELS = dataframe_sorted["SG_UF_IES"].values
+	
+	ANGLES_N = len(VALUES) + PADDING * len(np.unique(GROUP))
+	ANGLES = np.linspace(0, 2 * np.pi, num=ANGLES_N, endpoint=False)
+	WIDTH = (2 * np.pi) / len(ANGLES)
 
-ax2.set_theta_offset(OFFSET_negros)
+	GROUPS_SIZE = [len(regiao[1]) for regiao in dataframe.groupby("NO_REGIAO_IES")]
 
-# define limites para altura da barra, de forma que aja um buraco no meio
-ax2.set_ylim(-100, 100)
+	IDXS = []
+	offset = 0
+	for tamanho in GROUPS_SIZE:
+		IDXS += list(range(offset + PADDING, offset + tamanho + PADDING))
+		offset += tamanho + PADDING
 
-ax2.set_frame_on(False)
-ax2.xaxis.grid(False)
-ax2.yaxis.grid(False)
-ax2.set_xticks([])
-ax2.set_rlabel_position(-355)
-ax2.set_yticks([20, 40, 60, 80, 100])
-ax2.set_yticklabels(["20%", "40%", "60%", "80%", "100%"], fontsize=9)
+	axes.set_title(title, verticalalignment="bottom")
 
-GROUPS_SIZE = [len(regiao[1]) for regiao in professores_negros_raca_estado.groupby("NO_REGIAO_IES")]
-COLORS = [f"C{i}" for i, tamanho in enumerate(GROUPS_SIZE) for _ in range(tamanho)]
+	axes.set_theta_offset(OFFSET)
 
-ax2.bar(
-	ANGLES_negros[IDXS], VALUES_negros, width=WIDTH_negros, linewidth=2,
-	color=COLORS, edgecolor="#ffffff"
-)
+	# define limites para altura da barra, de forma que aja um buraco no meio
+	axes.set_ylim(-100, 100)
 
-add_labels(ANGLES_negros[IDXS], VALUES_negros, LABELS_negros, OFFSET_negros, ax2)
+	axes.set_frame_on(False)
+	axes.xaxis.grid(False)
+	axes.yaxis.grid(False)
+	axes.set_xticks([])
+	axes.set_rlabel_position(-355)
+	axes.set_yticks([20, 40, 60, 80, 100])
+	axes.set_yticklabels(["20%", "40%", "60%", "80%", "100%"], fontsize=9)
 
-offset = 0
-for grupo, tamanho in zip(["Centro-Oeste", "Nordeste", "Norte", "Sudeste", "Sul"], GROUPS_SIZE):
-	x1 = np.linspace(ANGLES_negros[offset + PAD_negros], ANGLES_negros[offset + tamanho + PAD_negros - 1])
-	ax2.plot(x1, [-5] * 50, color="#333333")
+	COLORS = [f"C{i}" for i, tamanho in enumerate(GROUPS_SIZE) for _ in range(tamanho)]
 
-	ax2.text(
-		np.mean(x1), -20, grupo, color="#333333", fontsize=8,
-		fontweight="bold", ha="center", va="top"
+	axes.bar(
+		ANGLES[IDXS], VALUES, width=WIDTH, linewidth=2,
+		color=COLORS, edgecolor="#ffffff"
 	)
 
-	# adicionando marcações de 20%, 40%, 60%, 80% e 100%
-	x2 = np.linspace(ANGLES_negros[offset], ANGLES_negros[offset + tamanho + PAD_negros - 1], num=50)
-	ax2.plot(x2, [20] * 50, color="#bebebe", lw=0.8)
-	ax2.plot(x2, [40] * 50, color="#bebebe", lw=0.8)
-	ax2.plot(x2, [60] * 50, color="#bebebe", lw=0.8)
-	ax2.plot(x2, [80] * 50, color="#bebebe", lw=0.8)
-	ax2.plot(x2, [100] * 50, color="#bebebe", lw=0.8)
+	add_labels(ANGLES[IDXS], VALUES, LABELS, OFFSET, axes)
 
-	offset += tamanho + PAD_negros
+	offset = 0
+	for grupo, tamanho in zip(["Centro-Oeste", "Nordeste", "Norte", "Sudeste", "Sul"], GROUPS_SIZE):
+		x1 = np.linspace(ANGLES[offset + PADDING], ANGLES[offset + tamanho + PADDING - 1])
+		axes.plot(x1, [-5] * 50, color="#333333")
 
-plt.show()
+		axes.text(
+			np.mean(x1), -20, grupo, color="#333333", fontsize=8,
+			fontweight="bold", ha="center", va="top"
+		)
+
+		# adicionando marcações de 20%, 40%, 60%, 80% e 100%
+		x2 = np.linspace(ANGLES[offset], ANGLES[offset + tamanho + PADDING - 1], num=50)
+		axes.plot(x2, [20] * 50, color="#bebebe", lw=0.8)
+		axes.plot(x2, [40] * 50, color="#bebebe", lw=0.8)
+		axes.plot(x2, [60] * 50, color="#bebebe", lw=0.8)
+		axes.plot(x2, [80] * 50, color="#bebebe", lw=0.8)
+		axes.plot(x2, [100] * 50, color="#bebebe", lw=0.8)
+
+		offset += tamanho + PADDING
